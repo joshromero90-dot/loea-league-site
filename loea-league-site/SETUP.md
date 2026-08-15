@@ -1,4 +1,4 @@
-# Setup Guide — The League of Extraordinary Asshole
+# Setup Guide — The League of Extraordinary Assholes
 
 This is a Next.js app with Supabase (auth + database) as the backend, meant
 to be deployed on Netlify with your own domain. Follow these steps in order.
