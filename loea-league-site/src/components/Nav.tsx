@@ -19,13 +19,13 @@ export default async function Nav() {
   const profile = await getCurrentProfile();
 
   return (
-    <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-20">
+    <header className="border-b border-slate-800 bg-[#1b1b1c]/80 backdrop-blur sticky top-0 z-20">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl">🏈</span>
           <span className="font-bold tracking-tight text-slate-100">
             The League of{" "}
-            <span className="text-amber-400">Extraordinary Asshole</span>
+            <span className="text-amber-400">Extraordinary Assholes</span>
           </span>
         </Link>
 
