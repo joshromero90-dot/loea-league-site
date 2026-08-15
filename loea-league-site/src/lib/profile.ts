@@ -1,0 +1,25 @@
+import { createClient } from "@/lib/supabase/server";
+
+export type Profile = {
+  id: string;
+  display_name: string;
+  team_name: string | null;
+  is_commissioner: boolean;
+  created_at: string;
+};
+
+export async function getCurrentProfile(): Promise<Profile | null> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
+
+  return (profile as Profile) ?? null;
+}
