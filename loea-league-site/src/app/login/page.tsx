@@ -35,7 +35,7 @@ export default function LoginPage() {
     <div className="mx-auto flex min-h-[80vh] max-w-md flex-col justify-center px-4">
       <h1 className="mb-1 text-2xl font-bold text-slate-100">Manager Login</h1>
       <p className="mb-6 text-sm text-slate-400">
-        The League of Extraordinary Asshole
+        The League of Extraordinary Assholes
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
