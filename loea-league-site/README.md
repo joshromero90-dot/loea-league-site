@@ -1,4 +1,4 @@
-# The League of Extraordinary Asshole
+# The League of Extraordinary Assholes
 
 The league hub: polls, manager notes, a trade discussion board, curated
 links/resources, an auto-updating NFL news feed, league rules, a Hall of
