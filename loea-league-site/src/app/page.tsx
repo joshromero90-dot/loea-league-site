@@ -37,7 +37,7 @@ export default async function Home() {
           Welcome back{profile ? `, ${profile.display_name}` : ""} 🏆
         </h1>
         <p className="mt-1 text-slate-400">
-          Everything for The League of Extraordinary Asshole, in one place.
+          Everything for The League of Extraordinary Assholes, in one place.
         </p>
       </div>
 
