@@ -24,7 +24,7 @@ export default function MobileNav({
         {open ? "Close" : "Menu"}
       </button>
       {open && (
-        <div className="absolute left-0 right-0 top-full border-b border-slate-800 bg-slate-950 px-4 py-3">
+        <div className="absolute left-0 right-0 top-full border-b border-slate-800 bg-[#1b1b1c] px-4 py-3">
           <p className="mb-2 text-sm text-slate-400">
             {profile.display_name}
             {profile.is_commissioner && (
