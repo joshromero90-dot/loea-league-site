@@ -3,12 +3,26 @@ import Image from "next/image";
 import { getCurrentProfile } from "@/lib/profile";
 import SignOutButton from "./SignOutButton";
 import MobileNav from "./MobileNav";
+import NavDropdown from "./NavDropdown";
 
-const LINKS = [
+export type NavLink = { href: string; label: string; children?: undefined };
+export type NavGroup = {
+  href?: undefined;
+  label: string;
+  children: { href: string; label: string }[];
+};
+export type NavItem = NavLink | NavGroup;
+
+const LINKS: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/standings", label: "Standings" },
-  { href: "/polls", label: "Polls" },
-  { href: "/notes", label: "Manager Notes" },
+  {
+    label: "Weekly Updates",
+    children: [
+      { href: "/notes", label: "Manager Notes" },
+      { href: "/polls", label: "Polls" },
+    ],
+  },
   { href: "/trade-board", label: "Trade Board" },
   { href: "/news", label: "News" },
   { href: "/resources", label: "Links" },
@@ -29,22 +43,30 @@ export default async function Nav() {
               alt="The League of Extraordinary Assholes"
               width={480}
               height={313}
-              className="h-48 w-auto"
+              className="h-24 w-auto"
               priority
             />
           </Link>
 
           {profile && (
             <nav className="hidden flex-wrap items-center gap-1 md:flex">
-              {LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {LINKS.map((link) =>
+                link.children ? (
+                  <NavDropdown
+                    key={link.label}
+                    label={link.label}
+                    links={link.children}
+                  />
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
             </nav>
           )}
         </div>
