@@ -20,7 +20,7 @@ export default async function Nav() {
   const profile = await getCurrentProfile();
 
   return (
-    <header className="border-b border-slate-800 bg-[#1b1b1c]/80 backdrop-blur sticky top-0 z-20">
+    <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-20">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <div className="flex min-w-0 items-center gap-6">
           <Link href="/" className="flex shrink-0 items-center">
