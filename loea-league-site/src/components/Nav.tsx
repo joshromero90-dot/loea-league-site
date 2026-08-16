@@ -28,7 +28,7 @@ export default async function Nav() {
             alt="The League of Extraordinary Assholes"
             width={480}
             height={313}
-            className="h-24 w-auto"
+            className="h-48 w-auto"
             priority
           />
         </Link>
