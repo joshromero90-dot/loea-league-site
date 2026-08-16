@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getCurrentProfile } from "@/lib/profile";
 import SignOutButton from "./SignOutButton";
 import MobileNav from "./MobileNav";
@@ -21,12 +22,15 @@ export default async function Nav() {
   return (
     <header className="border-b border-slate-800 bg-[#1b1b1c]/80 backdrop-blur sticky top-0 z-20">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl">🏈</span>
-          <span className="font-bold tracking-tight text-slate-100">
-            The League of{" "}
-            <span className="text-amber-400">Extraordinary Assholes</span>
-          </span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="The League of Extraordinary Assholes"
+            width={480}
+            height={313}
+            className="h-12 w-auto"
+            priority
+          />
         </Link>
 
         {profile && (
