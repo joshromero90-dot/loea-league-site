@@ -4,12 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import SignOutButton from "./SignOutButton";
 import type { Profile } from "@/lib/profile";
+import type { NavItem } from "./Nav";
 
 export default function MobileNav({
   links,
   profile,
 }: {
-  links: { href: string; label: string }[];
+  links: NavItem[];
   profile: Profile;
 }) {
   const [open, setOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function MobileNav({
         {open ? "Close" : "Menu"}
       </button>
       {open && (
-        <div className="absolute left-0 right-0 top-full border-b border-slate-800 bbg-slate-950 px-4 py-3">
+        <div className="absolute left-0 right-0 top-full border-b border-slate-800 bg-slate-950 px-4 py-3">
           <p className="mb-2 text-sm text-slate-400">
             {profile.display_name}
             {profile.is_commissioner && (
@@ -34,16 +35,34 @@ export default function MobileNav({
             )}
           </p>
           <div className="flex flex-col gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-amber-400"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) =>
+              link.children ? (
+                <div key={link.label} className="flex flex-col">
+                  <span className="mt-2 px-2 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    {link.label}
+                  </span>
+                  {link.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      onClick={() => setOpen(false)}
+                      className="rounded-md px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-amber-400"
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-2 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-amber-400"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
           <div className="mt-3">
             <SignOutButton />
