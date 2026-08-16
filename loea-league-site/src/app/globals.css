@@ -1,8 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1b1b1c;
-  --foreground: #e2e8f0;
+  --background: #14150d;
+  --foreground: #f2efe2;
+}
+
+@theme {
+  /* Olive-dark neutrals, pulled from the badge's background green */
+  --color-slate-100: #f2efe2;
+  --color-slate-200: #dcd8bc;
+  --color-slate-300: #c2bfa0;
+  --color-slate-400: #a5a288;
+  --color-slate-500: #8c8a70;
+  --color-slate-700: #494a2e;
+  --color-slate-800: #34351f;
+  --color-slate-900: #212314;
+  --color-slate-950: #14150d;
+
+  /* Gold, pulled from the badge's lettering/border */
+  --color-amber-400: #dcaa42;
+  --color-amber-500: #c08331;
+
+  /* Red-orange, pulled from the badge's script text */
+  --color-red-400: #e37456;
+  --color-red-500: #ce4d33;
 }
 
 @theme inline {
