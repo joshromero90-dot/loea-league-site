@@ -16,6 +16,7 @@ export type NavItem = NavLink | NavGroup;
 const LINKS: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/standings", label: "Standings" },
+  { href: "/managers", label: "Managers" },
   {
     label: "Weekly Updates",
     children: [
@@ -61,6 +62,35 @@ export default async function Nav() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
+            </nav>
+          )}
+        </div>
+
+        {profile && (
+          <div className="hidden shrink-0 items-center gap-3 md:flex">
+            <span className="text-sm text-slate-400">
+              {profile.display_name}
+              {profile.is_commissioner && (
+                <span className="ml-2 rounded-full bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-400">
+                  Commissioner
+                </span>
+              )}
+            </span>
+            <SignOutButton />
+          </div>
+        )}
+
+        {profile && <MobileNav links={LINKS} profile={profile} />}
+      </div>
+    </header>
+  );
+}
                     className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
                   >
                     {link.label}
