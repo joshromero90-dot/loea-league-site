@@ -22,19 +22,35 @@ export default async function Nav() {
   return (
     <header className="border-b border-slate-800 bg-[#1b1b1c]/80 backdrop-blur sticky top-0 z-20">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/logo.png"
-            alt="The League of Extraordinary Assholes"
-            width={480}
-            height={313}
-            className="h-48 w-auto"
-            priority
-          />
-        </Link>
+        <div className="flex min-w-0 items-center gap-6">
+          <Link href="/" className="flex shrink-0 items-center">
+            <Image
+              src="/logo.png"
+              alt="The League of Extraordinary Assholes"
+              width={480}
+              height={313}
+              className="h-48 w-auto"
+              priority
+            />
+          </Link>
+
+          {profile && (
+            <nav className="hidden flex-wrap items-center gap-1 md:flex">
+              {LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          )}
+        </div>
 
         {profile && (
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden shrink-0 items-center gap-3 md:flex">
             <span className="text-sm text-slate-400">
               {profile.display_name}
               {profile.is_commissioner && (
@@ -49,20 +65,6 @@ export default async function Nav() {
 
         {profile && <MobileNav links={LINKS} profile={profile} />}
       </div>
-
-      {profile && (
-        <nav className="hidden max-w-6xl gap-1 overflow-x-auto px-4 pb-2 md:mx-auto md:flex">
-          {LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      )}
     </header>
   );
 }
