@@ -43,11 +43,120 @@ export function espnConfigured() {
   return Boolean(process.env.ESPN_LEAGUE_ID && process.env.ESPN_SEASON_YEAR);
 }
 
+export type EspnHallOfFameSeason = {
+  seasonYear: number;
+  championTeam: string | null;
+  runnerUpTeam: string | null;
+  lastPlaceTeam: string | null;
+};
+
+type EspnHistoryTeam = {
+  id: number;
+  name?: string;
+  location?: string;
+  nickname?: string;
+  rankCalculatedFinal?: number;
+  playoffSeed?: number;
+};
+
+type EspnHistorySeasonResponse = {
+  teams?: EspnHistoryTeam[];
+  seasonId?: number;
+};
+
+export function espnHistoryConfigured() {
+  return Boolean(
+    process.env.ESPN_LEAGUE_ID &&
+      process.env.ESPN_HISTORY_START_YEAR &&
+      process.env.ESPN_SEASON_YEAR
+  );
+}
+
+function espnHeaders(): Record<string, string> {
+  const swid = process.env.ESPN_SWID;
+  const espnS2 = process.env.ESPN_S2;
+  const headers: Record<string, string> = {};
+  if (swid && espnS2) {
+    headers["Cookie"] = `SWID=${swid}; espn_s2=${espnS2}`;
+  }
+  return headers;
+}
+
+async function fetchEspnSeason(
+  leagueId: string,
+  year: number
+): Promise<EspnHallOfFameSeason | null> {
+  const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/leagueHistory/${leagueId}?seasonId=${year}&view=mTeam&view=mStandings`;
+
+  const res = await fetch(url, {
+    headers: espnHeaders(),
+    next: { revalidate: 3600 }, // history rarely changes — refresh hourly
+  });
+  if (!res.ok) return null;
+
+  const raw = await res.json();
+  const data: EspnHistorySeasonResponse | undefined = Array.isArray(raw)
+    ? raw[0]
+    : raw;
+  const teams = data?.teams;
+  if (!teams || teams.length === 0) return null;
+
+  const teamName = (t: EspnHistoryTeam) =>
+    (t.name ?? `${t.location ?? ""} ${t.nickname ?? ""}`.trim()) || "Unknown";
+
+  const ranked = [...teams].sort((a, b) => {
+    const rankA = a.rankCalculatedFinal ?? a.playoffSeed ?? 999;
+    const rankB = b.rankCalculatedFinal ?? b.playoffSeed ?? 999;
+    return rankA - rankB;
+  });
+
+  const champion = ranked[0];
+  const runnerUp = ranked[1];
+  const lastPlace = ranked[ranked.length - 1];
+
+  return {
+    seasonYear: year,
+    championTeam: champion ? teamName(champion) : null,
+    runnerUpTeam: runnerUp ? teamName(runnerUp) : null,
+    lastPlaceTeam:
+      lastPlace && lastPlace !== champion ? teamName(lastPlace) : null,
+  };
+}
+
+/**
+ * Fetches final standings (champion / runner-up / last place) for every
+ * completed season from ESPN_HISTORY_START_YEAR up to (but not including)
+ * the current ESPN_SEASON_YEAR. Seasons ESPN has no data for are silently
+ * skipped rather than failing the whole page.
+ */
+export async function getEspnHallOfFameHistory(): Promise<
+  EspnHallOfFameSeason[]
+> {
+  const leagueId = process.env.ESPN_LEAGUE_ID;
+  const startYear = Number(process.env.ESPN_HISTORY_START_YEAR);
+  const currentSeason = Number(process.env.ESPN_SEASON_YEAR);
+
+  if (!leagueId || !startYear || !currentSeason) return [];
+
+  const endYear = currentSeason - 1;
+  if (endYear < startYear) return [];
+
+  const years: number[] = [];
+  for (let y = startYear; y <= endYear; y++) years.push(y);
+
+  const results = await Promise.allSettled(
+    years.map((year) => fetchEspnSeason(leagueId, year))
+  );
+
+  return results
+    .map((r) => (r.status === "fulfilled" ? r.value : null))
+    .filter((s): s is EspnHallOfFameSeason => s !== null && s.championTeam !== null)
+    .sort((a, b) => b.seasonYear - a.seasonYear);
+}
+
 export async function getEspnStandings(): Promise<EspnStandings> {
   const leagueId = process.env.ESPN_LEAGUE_ID;
   const seasonYear = process.env.ESPN_SEASON_YEAR;
-  const swid = process.env.ESPN_SWID;
-  const espnS2 = process.env.ESPN_S2;
 
   if (!leagueId || !seasonYear) {
     throw new Error("ESPN league not configured");
@@ -55,13 +164,8 @@ export async function getEspnStandings(): Promise<EspnStandings> {
 
   const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${seasonYear}/segments/0/leagues/${leagueId}?view=mTeam&view=mStandings`;
 
-  const headers: Record<string, string> = {};
-  if (swid && espnS2) {
-    headers["Cookie"] = `SWID=${swid}; espn_s2=${espnS2}`;
-  }
-
   const res = await fetch(url, {
-    headers,
+    headers: espnHeaders(),
     next: { revalidate: 300 }, // refresh every 5 minutes
   });
 
