@@ -154,6 +154,96 @@ export async function getEspnHallOfFameHistory(): Promise<
     .sort((a, b) => b.seasonYear - a.seasonYear);
 }
 
+export type EspnRosterPlayer = {
+  playerId: number;
+  name: string;
+  slot: string;
+  isStarter: boolean;
+  injuryStatus?: string;
+};
+
+const LINEUP_SLOT_LABELS: Record<number, string> = {
+  0: "QB",
+  1: "QB",
+  2: "RB",
+  3: "RB/WR",
+  4: "WR",
+  5: "WR/TE",
+  6: "TE",
+  7: "OP",
+  16: "D/ST",
+  17: "K",
+  20: "Bench",
+  21: "IR",
+  23: "FLEX",
+};
+
+const BENCH_SLOT_IDS = new Set([20, 21]);
+
+type EspnRosterEntry = {
+  lineupSlotId: number;
+  playerPoolEntry?: {
+    player?: {
+      id?: number;
+      fullName?: string;
+      injuryStatus?: string;
+    };
+  };
+};
+
+type EspnRosterTeam = {
+  id: number;
+  roster?: { entries?: EspnRosterEntry[] };
+};
+
+type EspnRosterResponse = {
+  teams?: EspnRosterTeam[];
+};
+
+/**
+ * Fetches a single team's current roster (starters + bench) for the
+ * configured season. Returns an empty array if the team has no roster yet
+ * (e.g. before the draft happens), or null if ESPN isn't configured / the
+ * request failed outright.
+ */
+export async function getEspnRoster(
+  teamId: number
+): Promise<EspnRosterPlayer[] | null> {
+  const leagueId = process.env.ESPN_LEAGUE_ID;
+  const seasonYear = process.env.ESPN_SEASON_YEAR;
+  if (!leagueId || !seasonYear) return null;
+
+  const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${seasonYear}/segments/0/leagues/${leagueId}?view=mRoster`;
+
+  const res = await fetch(url, {
+    headers: espnHeaders(),
+    next: { revalidate: 300 }, // refresh every 5 minutes
+  });
+  if (!res.ok) return null;
+
+  const data: EspnRosterResponse = await res.json();
+  const team = data.teams?.find((t) => t.id === teamId);
+  if (!team) return null;
+
+  const entries = team.roster?.entries ?? [];
+
+  return entries
+    .map((entry) => {
+      const player = entry.playerPoolEntry?.player;
+      return {
+        playerId: player?.id ?? 0,
+        name: player?.fullName ?? "Unknown Player",
+        slot: LINEUP_SLOT_LABELS[entry.lineupSlotId] ?? "—",
+        isStarter: !BENCH_SLOT_IDS.has(entry.lineupSlotId),
+        injuryStatus:
+          player?.injuryStatus && player.injuryStatus !== "ACTIVE"
+            ? player.injuryStatus
+            : undefined,
+      };
+    })
+    .sort((a, b) => (a.isStarter === b.isStarter ? 0 : a.isStarter ? -1 : 1));
+}
+
 export async function getEspnStandings(): Promise<EspnStandings> {
   const leagueId = process.env.ESPN_LEAGUE_ID;
   const seasonYear = process.env.ESPN_SEASON_YEAR;
