@@ -1,16 +1,34 @@
 import { createClient } from "@/lib/supabase/server";
-import { Card } from "@/components/Card";
-import type { Profile } from "@/lib/profile";
+import { getCurrentProfile } from "@/lib/profile";
+import { espnConfigured, getEspnStandings } from "@/lib/espn";
+import ManagerCard, { type ManagerProfile } from "@/components/ManagerCard";
 
 export default async function ManagersPage() {
   const supabase = await createClient();
+  const profile = await getCurrentProfile();
 
   const { data: profiles } = await supabase
     .from("profiles")
-    .select("*")
+    .select("id,display_name,team_name,is_commissioner,espn_team_id")
     .order("created_at", { ascending: true });
 
-  const managers = (profiles as Profile[] | null) ?? [];
+  const managers = (profiles as ManagerProfile[] | null) ?? [];
+
+  const hasEspn = espnConfigured();
+  let espnTeams: { id: number; name: string; abbrev: string }[] = [];
+
+  if (hasEspn) {
+    try {
+      const standings = await getEspnStandings();
+      espnTeams = standings.teams.map((t) => ({
+        id: t.id,
+        name: t.name,
+        abbrev: t.abbrev,
+      }));
+    } catch {
+      espnTeams = [];
+    }
+  }
 
   return (
     <div>
@@ -19,6 +37,8 @@ export default async function ManagersPage() {
         <p className="mt-1 text-sm text-slate-400">
           {managers.length} manager{managers.length === 1 ? "" : "s"} signed
           up so far.
+          {hasEspn &&
+            " Link your ESPN team below to show your lineup once the draft happens."}
         </p>
       </div>
 
@@ -27,23 +47,13 @@ export default async function ManagersPage() {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {managers.map((manager) => (
-            <Card key={manager.id}>
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <p className="font-semibold text-slate-100">
-                    {manager.display_name}
-                  </p>
-                  <p className="mt-1 text-sm text-slate-400">
-                    {manager.team_name || "No team name set"}
-                  </p>
-                </div>
-                {manager.is_commissioner && (
-                  <span className="shrink-0 rounded-full bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-400">
-                    Commissioner
-                  </span>
-                )}
-              </div>
-            </Card>
+            <ManagerCard
+              key={manager.id}
+              manager={manager}
+              isOwnProfile={manager.id === profile?.id}
+              espnTeams={espnTeams}
+              espnConfigured={hasEspn}
+            />
           ))}
         </div>
       )}
