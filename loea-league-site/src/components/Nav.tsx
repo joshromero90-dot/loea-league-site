@@ -74,14 +74,17 @@ export default async function Nav() {
 
         {profile && (
           <div className="hidden shrink-0 items-center gap-3 md:flex">
-            <span className="text-sm text-slate-400">
+            <Link
+              href="/profile"
+              className="text-sm text-slate-400 transition hover:text-amber-400"
+            >
               {profile.display_name}
               {profile.is_commissioner && (
                 <span className="ml-2 rounded-full bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-400">
                   Commissioner
                 </span>
               )}
-            </span>
+            </Link>
             <SignOutButton />
           </div>
         )}
