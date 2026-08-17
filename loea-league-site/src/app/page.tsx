@@ -1,34 +1,38 @@
 import { getCurrentProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
-import { CardLink, Card } from "@/components/Card";
+import { Card } from "@/components/Card";
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
+import { espnConfigured, getEspnStandings, type EspnStandings } from "@/lib/espn";
 
 export default async function Home() {
   const profile = await getCurrentProfile();
   const supabase = await createClient();
 
-  const [{ data: latestNote }, { data: openPolls }, { data: recentThreads }] =
-    await Promise.all([
-      supabase
-        .from("notes")
-        .select("id,title,created_at")
-        .order("pinned", { ascending: false })
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-      supabase
-        .from("polls")
-        .select("id,question")
-        .eq("is_closed", false)
-        .order("created_at", { ascending: false })
-        .limit(3),
-      supabase
-        .from("trade_threads")
-        .select("id,title,created_at")
-        .order("created_at", { ascending: false })
-        .limit(3),
-    ]);
+  const [{ data: recentNotes }, { data: openPolls }] = await Promise.all([
+    supabase
+      .from("notes")
+      .select("id,title,created_at")
+      .order("pinned", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(3),
+    supabase
+      .from("polls")
+      .select("id,question")
+      .eq("is_closed", false)
+      .order("created_at", { ascending: false })
+      .limit(5),
+  ]);
+
+  let standings: EspnStandings | null = null;
+  let standingsError: string | null = null;
+  if (espnConfigured()) {
+    try {
+      standings = await getEspnStandings();
+    } catch (err) {
+      standingsError =
+        err instanceof Error ? err.message : "Couldn't load standings.";
+    }
+  }
 
   return (
     <div>
@@ -41,80 +45,104 @@ export default async function Home() {
         </p>
       </div>
 
-      <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <CardLink
-          href="/standings"
-          emoji="📊"
-          title="Standings"
-          description="Live scores and league standings."
-        />
-        <CardLink
-          href="/polls"
-          emoji="🗳️"
-          title="Polls"
-          description="Vote on league decisions."
-        />
-        <CardLink
-          href="/notes"
-          emoji="📌"
-          title="Manager Notes"
-          description="Announcements from the commissioner."
-        />
-        <CardLink
-          href="/trade-board"
-          emoji="🔄"
-          title="Trade Board"
-          description="Pitch and discuss trades."
-        />
-        <CardLink
-          href="/news"
-          emoji="📰"
-          title="News"
-          description="Latest NFL & fantasy football news."
-        />
-        <CardLink
-          href="/resources"
-          emoji="🔗"
-          title="Links & Resources"
-          description="Rankings, tools, and cheat sheets."
-        />
-        <CardLink
-          href="/rules"
-          emoji="📜"
-          title="Rules"
-          description="League constitution & scoring."
-        />
-        <CardLink
-          href="/history"
-          emoji="🏅"
-          title="Hall of Fame"
-          description="Champions, punishments, and shame."
-        />
-      </div>
+      <Card className="mb-8">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="font-semibold text-slate-100">📊 Standings</h2>
+          <Link
+            href="/standings"
+            className="text-xs text-amber-400 hover:underline"
+          >
+            Full standings →
+          </Link>
+        </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        {!espnConfigured() && (
+          <p className="text-sm text-slate-500">
+            Live standings aren&apos;t connected yet.
+          </p>
+        )}
+        {espnConfigured() && standingsError && (
+          <p className="text-sm text-red-400">{standingsError}</p>
+        )}
+        {standings && standings.teams.length > 0 && (
+          <div className="overflow-hidden rounded-lg border border-slate-800">
+            <table className="w-full text-sm">
+              <thead className="bg-slate-900 text-left text-slate-400">
+                <tr>
+                  <th className="px-3 py-2">#</th>
+                  <th className="px-3 py-2">Team</th>
+                  <th className="px-3 py-2 text-right">W-L-T</th>
+                  <th className="px-3 py-2 text-right">PF</th>
+                </tr>
+              </thead>
+              <tbody>
+                {standings.teams.map((team, i) => (
+                  <tr
+                    key={team.id}
+                    className="border-t border-slate-800 text-slate-200"
+                  >
+                    <td className="px-3 py-2 text-slate-500">{i + 1}</td>
+                    <td className="px-3 py-2 font-medium">{team.name}</td>
+                    <td className="px-3 py-2 text-right">
+                      {team.wins}-{team.losses}
+                      {team.ties ? `-${team.ties}` : ""}
+                    </td>
+                    <td className="px-3 py-2 text-right">
+                      {team.pointsFor.toFixed(1)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
-          <h2 className="mb-3 font-semibold text-slate-100">Latest Note</h2>
-          {latestNote ? (
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="font-semibold text-slate-100">📌 New Notes</h2>
             <Link
               href="/notes"
-              className="text-sm text-amber-400 hover:underline"
+              className="text-xs text-amber-400 hover:underline"
             >
-              {latestNote.title}
+              All notes →
             </Link>
+          </div>
+          {recentNotes && recentNotes.length > 0 ? (
+            <ul className="flex flex-col gap-2">
+              {recentNotes.map((n) => (
+                <li key={n.id}>
+                  <Link
+                    href="/notes"
+                    className="text-sm text-amber-400 hover:underline"
+                  >
+                    {n.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           ) : (
             <p className="text-sm text-slate-500">No notes yet.</p>
           )}
         </Card>
 
         <Card>
-          <h2 className="mb-3 font-semibold text-slate-100">Open Polls</h2>
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="font-semibold text-slate-100">🗳️ Open Polls</h2>
+            <Link
+              href="/polls"
+              className="text-xs text-amber-400 hover:underline"
+            >
+              All polls →
+            </Link>
+          </div>
           {openPolls && openPolls.length > 0 ? (
             <ul className="flex flex-col gap-2">
               {openPolls.map((p) => (
                 <li key={p.id}>
                   <Link
-                    href={`/polls/${p.id}`}
+                    href="/polls"
                     className="text-sm text-amber-400 hover:underline"
                   >
                     {p.question}
@@ -124,33 +152,6 @@ export default async function Home() {
             </ul>
           ) : (
             <p className="text-sm text-slate-500">No open polls.</p>
-          )}
-        </Card>
-
-        <Card>
-          <h2 className="mb-3 font-semibold text-slate-100">
-            Recent Trade Talk
-          </h2>
-          {recentThreads && recentThreads.length > 0 ? (
-            <ul className="flex flex-col gap-2">
-              {recentThreads.map((t) => (
-                <li key={t.id}>
-                  <Link
-                    href={`/trade-board/${t.id}`}
-                    className="text-sm text-amber-400 hover:underline"
-                  >
-                    {t.title}
-                  </Link>{" "}
-                  <span className="text-xs text-slate-500">
-                    {formatDistanceToNow(new Date(t.created_at), {
-                      addSuffix: true,
-                    })}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-sm text-slate-500">No trade discussions yet.</p>
           )}
         </Card>
       </div>
