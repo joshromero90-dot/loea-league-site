@@ -274,7 +274,7 @@ create policy "commissioners update hall of fame"
 create policy "commissioners delete hall of fame"
   on public.hall_of_fame for delete to authenticated
   using (public.is_commissioner());
-
+alter table public.profiles add column if not exists espn_team_id integer;
 -- ============================================================================
 -- MAKE YOURSELF COMMISSIONER
 -- After you sign up on the site once, run this (swap in your email) so you
