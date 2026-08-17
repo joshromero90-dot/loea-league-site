@@ -2,7 +2,6 @@ import { getCurrentProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
 import { Card } from "@/components/Card";
 import Link from "next/link";
-import Image from "next/image";
 import { espnConfigured, getEspnStandings, type EspnStandings } from "@/lib/espn";
 
 export default async function Home() {
@@ -37,19 +36,6 @@ export default async function Home() {
 
   return (
     <div>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed bottom-0 right-0 -z-10 opacity-[0.07]"
-      >
-        <Image
-          src="/watermark-recliner.png"
-          alt=""
-          width={700}
-          height={700}
-          className="h-auto w-[320px] sm:w-[440px] lg:w-[560px]"
-        />
-      </div>
-
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-100">
           Welcome back{profile ? `, ${profile.display_name}` : ""} 🏆
