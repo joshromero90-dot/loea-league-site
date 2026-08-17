@@ -27,22 +27,34 @@ export default async function PollPage({
     .eq("poll_id", id)
     .order("position");
 
-  const { data: votes } = await supabase
+  const { data: rawVotes } = await supabase
     .from("poll_votes")
-    .select("option_id,voter_id")
+    .select("option_id,voter_id,profiles(display_name)")
     .eq("poll_id", id);
 
+  type VoteRow = {
+    option_id: string;
+    voter_id: string;
+    profiles: { display_name: string } | null;
+  };
+  const votes = (rawVotes ?? []) as unknown as VoteRow[];
+
   const voteCounts = new Map<string, number>();
-  votes?.forEach((v) => {
+  votes.forEach((v) => {
     voteCounts.set(v.option_id, (voteCounts.get(v.option_id) ?? 0) + 1);
   });
 
-  const myVote = votes?.find((v) => v.voter_id === profile?.id);
+  const myVote = votes.find((v) => v.voter_id === profile?.id);
 
   const optionsWithCounts = (options ?? []).map((o) => ({
     id: o.id,
     option_text: o.option_text,
     votes: voteCounts.get(o.id) ?? 0,
+    voters: profile?.is_commissioner
+      ? votes
+          .filter((v) => v.option_id === o.id)
+          .map((v) => v.profiles?.display_name ?? "Unknown")
+      : undefined,
   }));
 
   return (
@@ -58,7 +70,7 @@ export default async function PollPage({
       <PollVoteForm
         pollId={poll.id}
         options={optionsWithCounts}
-        totalVotes={votes?.length ?? 0}
+        totalVotes={votes.length}
         myVoteOptionId={myVote?.option_id ?? null}
         isClosed={poll.is_closed}
       />
