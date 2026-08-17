@@ -13,6 +13,7 @@ create table if not exists public.profiles (
   display_name text not null,
   team_name text,
   is_commissioner boolean not null default false,
+  espn_team_id integer,
   created_at timestamptz not null default now()
 );
 
@@ -146,7 +147,7 @@ on conflict (slug) do nothing;
 create table if not exists public.hall_of_fame (
   id uuid primary key default gen_random_uuid(),
   season_year int not null,
-  champion_team text not null,
+  champion_team text,
   champion_manager text,
   runner_up_team text,
   last_place_team text,
@@ -274,7 +275,7 @@ create policy "commissioners update hall of fame"
 create policy "commissioners delete hall of fame"
   on public.hall_of_fame for delete to authenticated
   using (public.is_commissioner());
-alter table public.profiles add column if not exists espn_team_id integer;
+
 -- ============================================================================
 -- MAKE YOURSELF COMMISSIONER
 -- After you sign up on the site once, run this (swap in your email) so you
@@ -282,4 +283,12 @@ alter table public.profiles add column if not exists espn_team_id integer;
 --
 --   update public.profiles set is_commissioner = true
 --   where id = (select id from auth.users where email = 'you@example.com');
+-- ============================================================================
+
+-- ============================================================================
+-- EXISTING DATABASE? ADD THE ESPN TEAM LINK COLUMN
+-- If you ran this schema before the Managers page's "link your ESPN team /
+-- view lineup" feature was added, run this once so the column exists:
+--
+--   alter table public.profiles add column if not exists espn_team_id integer;
 -- ============================================================================
