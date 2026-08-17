@@ -150,7 +150,9 @@ create table if not exists public.hall_of_fame (
   champion_team text,
   champion_manager text,
   runner_up_team text,
+  runner_up_manager text,
   last_place_team text,
+  last_place_manager text,
   punishment text,
   notes text,
   created_by uuid not null references public.profiles (id),
@@ -290,5 +292,3 @@ create policy "commissioners delete hall of fame"
 -- If you ran this schema before the Managers page's "link your ESPN team /
 -- view lineup" feature was added, run this once so the column exists:
 --
---   alter table public.profiles add column if not exists espn_team_id integer;
--- ============================================================================
