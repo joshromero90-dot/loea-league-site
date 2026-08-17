@@ -142,7 +142,11 @@ export default async function HistoryPage() {
                 <dt className="text-slate-500">🏆 Champion</dt>
                 <dd className="text-slate-100">
                   {entry.championTeam ?? "—"}
-                  {entry.championManager && ` (${entry.championManager})`}
+                  {entry.championManager && (
+                    <span className="block text-xs text-slate-500">
+                      {entry.championManager}
+                    </span>
+                  )}
                 </dd>
               </div>
               {entry.runnerUpTeam && (
@@ -150,7 +154,11 @@ export default async function HistoryPage() {
                   <dt className="text-slate-500">🥈 Runner-up</dt>
                   <dd className="text-slate-100">
                     {entry.runnerUpTeam}
-                    {entry.runnerUpManager && ` (${entry.runnerUpManager})`}
+                    {entry.runnerUpManager && (
+                      <span className="block text-xs text-slate-500">
+                        {entry.runnerUpManager}
+                      </span>
+                    )}
                   </dd>
                 </div>
               )}
@@ -159,7 +167,11 @@ export default async function HistoryPage() {
                   <dt className="text-slate-500">💩 Last place</dt>
                   <dd className="text-slate-100">
                     {entry.lastPlaceTeam}
-                    {entry.lastPlaceManager && ` (${entry.lastPlaceManager})`}
+                    {entry.lastPlaceManager && (
+                      <span className="block text-xs text-slate-500">
+                        {entry.lastPlaceManager}
+                      </span>
+                    )}
                   </dd>
                 </div>
               )}
