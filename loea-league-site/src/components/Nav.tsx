@@ -16,19 +16,24 @@ export type NavItem = NavLink | NavGroup;
 const LINKS: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/standings", label: "Standings" },
-  { href: "/managers", label: "Managers" },
   {
-    label: "Weekly Updates",
+    label: "Updates",
     children: [
       { href: "/notes", label: "Manager Notes" },
       { href: "/polls", label: "Polls" },
+      { href: "/news", label: "News" },
     ],
   },
   { href: "/trade-board", label: "Trade Board" },
-  { href: "/news", label: "News" },
-  { href: "/resources", label: "Links" },
-  { href: "/rules", label: "Rules" },
-  { href: "/history", label: "Hall of Fame" },
+  {
+    label: "League Info",
+    children: [
+      { href: "/managers", label: "Managers" },
+      { href: "/resources", label: "Links" },
+      { href: "/rules", label: "Rules" },
+      { href: "/history", label: "Hall of Fame" },
+    ],
+  },
 ];
 
 export default async function Nav() {
