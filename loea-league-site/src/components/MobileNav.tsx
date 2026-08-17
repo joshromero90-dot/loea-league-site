@@ -26,14 +26,18 @@ export default function MobileNav({
       </button>
       {open && (
         <div className="absolute left-0 right-0 top-full border-b border-slate-800 bg-slate-950 px-4 py-3">
-          <p className="mb-2 text-sm text-slate-400">
+          <Link
+            href="/profile"
+            onClick={() => setOpen(false)}
+            className="mb-2 block text-sm text-slate-400 hover:text-amber-400"
+          >
             {profile.display_name}
             {profile.is_commissioner && (
               <span className="ml-2 rounded-full bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-400">
                 Commissioner
               </span>
             )}
-          </p>
+          </Link>
           <div className="flex flex-col gap-1">
             {links.map((link) =>
               link.children ? (
