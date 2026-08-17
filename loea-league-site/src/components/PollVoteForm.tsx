@@ -4,7 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-type Option = { id: string; option_text: string; votes: number };
+type Option = {
+  id: string;
+  option_text: string;
+  votes: number;
+  voters?: string[];
+};
 
 export default function PollVoteForm({
   pollId,
@@ -56,27 +61,33 @@ export default function PollVoteForm({
         const pct = totalVotes > 0 ? Math.round((opt.votes / totalVotes) * 100) : 0;
         const isMine = myVoteOptionId === opt.id;
         return (
-          <button
-            key={opt.id}
-            onClick={() => vote(opt.id)}
-            disabled={isClosed || loading !== null}
-            className={`relative w-full overflow-hidden rounded-lg border px-4 py-3 text-left transition disabled:cursor-default ${
-              isMine ? "border-amber-500" : "border-slate-700 hover:border-amber-500/60"
-            }`}
-          >
-            <div
-              className="absolute inset-y-0 left-0 bg-amber-500/15"
-              style={{ width: `${pct}%` }}
-            />
-            <div className="relative flex items-center justify-between">
-              <span className="text-slate-100">
-                {opt.option_text} {isMine && "✓"}
-              </span>
-              <span className="text-sm text-slate-400">
-                {loading === opt.id ? "Voting..." : `${pct}% (${opt.votes})`}
-              </span>
-            </div>
-          </button>
+          <div key={opt.id} className="flex flex-col gap-1">
+            <button
+              onClick={() => vote(opt.id)}
+              disabled={isClosed || loading !== null}
+              className={`relative w-full overflow-hidden rounded-lg border px-4 py-3 text-left transition disabled:cursor-default ${
+                isMine ? "border-amber-500" : "border-slate-700 hover:border-amber-500/60"
+              }`}
+            >
+              <div
+                className="absolute inset-y-0 left-0 bg-amber-500/15"
+                style={{ width: `${pct}%` }}
+              />
+              <div className="relative flex items-center justify-between">
+                <span className="text-slate-100">
+                  {opt.option_text} {isMine && "✓"}
+                </span>
+                <span className="text-sm text-slate-400">
+                  {loading === opt.id ? "Voting..." : `${pct}% (${opt.votes})`}
+                </span>
+              </div>
+            </button>
+            {opt.voters && opt.voters.length > 0 && (
+              <p className="pl-1 text-xs text-slate-500">
+                Voted by: {opt.voters.join(", ")}
+              </p>
+            )}
+          </div>
         );
       })}
       {error && <p className="text-sm text-red-400">{error}</p>}
