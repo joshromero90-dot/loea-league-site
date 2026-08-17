@@ -11,7 +11,9 @@ export default function NewHallOfFameEntryForm() {
   const [championTeam, setChampionTeam] = useState("");
   const [championManager, setChampionManager] = useState("");
   const [runnerUp, setRunnerUp] = useState("");
+  const [runnerUpManager, setRunnerUpManager] = useState("");
   const [lastPlace, setLastPlace] = useState("");
+  const [lastPlaceManager, setLastPlaceManager] = useState("");
   const [punishment, setPunishment] = useState("");
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,10 +34,12 @@ export default function NewHallOfFameEntryForm() {
     }
     const { error } = await supabase.from("hall_of_fame").insert({
       season_year: seasonYear,
-      champion_team: championTeam,
+      champion_team: championTeam || null,
       champion_manager: championManager || null,
       runner_up_team: runnerUp || null,
+      runner_up_manager: runnerUpManager || null,
       last_place_team: lastPlace || null,
+      last_place_manager: lastPlaceManager || null,
       punishment: punishment || null,
       notes: notes || null,
       created_by: user.id,
@@ -48,7 +52,9 @@ export default function NewHallOfFameEntryForm() {
     setChampionTeam("");
     setChampionManager("");
     setRunnerUp("");
+    setRunnerUpManager("");
     setLastPlace("");
+    setLastPlaceManager("");
     setPunishment("");
     setNotes("");
     setOpen(false);
@@ -86,10 +92,9 @@ export default function NewHallOfFameEntryForm() {
       </div>
       <div>
         <label className="mb-1 block text-sm text-slate-300">
-          Champion team
+          Champion team (leave blank if ESPN already has this season)
         </label>
         <input
-          required
           value={championTeam}
           onChange={(e) => setChampionTeam(e.target.value)}
           className={inputClass}
@@ -117,11 +122,31 @@ export default function NewHallOfFameEntryForm() {
       </div>
       <div>
         <label className="mb-1 block text-sm text-slate-300">
+          Runner-up manager (optional)
+        </label>
+        <input
+          value={runnerUpManager}
+          onChange={(e) => setRunnerUpManager(e.target.value)}
+          className={inputClass}
+        />
+      </div>
+      <div>
+        <label className="mb-1 block text-sm text-slate-300">
           Last place (optional)
         </label>
         <input
           value={lastPlace}
           onChange={(e) => setLastPlace(e.target.value)}
+          className={inputClass}
+        />
+      </div>
+      <div>
+        <label className="mb-1 block text-sm text-slate-300">
+          Last place manager (optional)
+        </label>
+        <input
+          value={lastPlaceManager}
+          onChange={(e) => setLastPlaceManager(e.target.value)}
           className={inputClass}
         />
       </div>
