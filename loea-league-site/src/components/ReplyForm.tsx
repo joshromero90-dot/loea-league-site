@@ -43,13 +43,13 @@ export default function ReplyForm({ threadId }: { threadId: string }) {
         onChange={(e) => setBody(e.target.value)}
         placeholder="Write a reply..."
         rows={3}
-        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+        className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
       />
       {error && <p className="text-sm text-red-400">{error}</p>}
       <button
         type="submit"
         disabled={loading}
-        className="self-start rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+        className="self-start bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
       >
         {loading ? "Posting..." : "Reply"}
       </button>

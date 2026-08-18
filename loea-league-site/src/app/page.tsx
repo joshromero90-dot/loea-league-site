@@ -37,7 +37,7 @@ export default async function Home() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-100">
+        <h1 className="text-4xl font-black uppercase tracking-tight text-slate-100 sm:text-5xl">
           Welcome back{profile ? `, ${profile.display_name}` : ""} 🏆
         </h1>
         <p className="mt-1 text-slate-400">
@@ -47,10 +47,10 @@ export default async function Home() {
 
       <Card className="mb-8">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-semibold text-slate-100">📊 Standings</h2>
+          <h2 className="font-black uppercase tracking-tight text-slate-100">📊 Standings</h2>
           <Link
             href="/standings"
-            className="text-xs text-amber-400 hover:underline"
+            className="text-xs font-bold uppercase text-amber-500 hover:underline"
           >
             Full standings →
           </Link>
@@ -65,9 +65,9 @@ export default async function Home() {
           <p className="text-sm text-red-400">{standingsError}</p>
         )}
         {standings && standings.teams.length > 0 && (
-          <div className="overflow-hidden rounded-lg border border-slate-800">
+          <div className="overflow-hidden border-2 border-slate-800">
             <table className="w-full text-sm">
-              <thead className="bg-slate-900 text-left text-slate-400">
+              <thead className="bg-slate-800 text-left text-xs uppercase tracking-wide text-slate-950">
                 <tr>
                   <th className="px-3 py-2">#</th>
                   <th className="px-3 py-2">Team</th>
@@ -101,10 +101,10 @@ export default async function Home() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-semibold text-slate-100">📌 New Notes</h2>
+            <h2 className="font-black uppercase tracking-tight text-slate-100">📌 New Notes</h2>
             <Link
               href="/notes"
-              className="text-xs text-amber-400 hover:underline"
+              className="text-xs font-bold uppercase text-amber-500 hover:underline"
             >
               All notes →
             </Link>
@@ -129,10 +129,10 @@ export default async function Home() {
 
         <Card>
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-semibold text-slate-100">🗳️ Open Polls</h2>
+            <h2 className="font-black uppercase tracking-tight text-slate-100">🗳️ Open Polls</h2>
             <Link
               href="/polls"
-              className="text-xs text-amber-400 hover:underline"
+              className="text-xs font-bold uppercase text-amber-500 hover:underline"
             >
               All polls →
             </Link>

@@ -36,7 +36,7 @@ export default async function ThreadPage({
   return (
     <div className="mx-auto max-w-2xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-100">{thread.title}</h1>
+        <h1 className="text-2xl font-black uppercase tracking-tight text-slate-100">{thread.title}</h1>
         <p className="mt-1 text-xs text-slate-500">
           Started by {starter?.display_name ?? "a manager"} ·{" "}
           {formatDistanceToNow(new Date(thread.created_at), { addSuffix: true })}
@@ -53,7 +53,7 @@ export default async function ThreadPage({
           return (
             <div
               key={m.id}
-              className="rounded-lg border border-slate-800 bg-slate-900/60 p-4"
+              className="border-2 border-slate-800 bg-slate-900 p-4"
             >
               <p className="text-sm text-slate-200">{m.body}</p>
               <p className="mt-2 text-xs text-slate-500">

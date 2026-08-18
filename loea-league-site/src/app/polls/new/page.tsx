@@ -65,7 +65,7 @@ export default function NewPollPage() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="mb-6 text-2xl font-bold text-slate-100">New Poll</h1>
+      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-slate-100">New Poll</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
           <label className="mb-1 block text-sm text-slate-300">Question</label>
@@ -73,7 +73,7 @@ export default function NewPollPage() {
             required
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
             placeholder="Should we switch to PPR next season?"
           />
         </div>
@@ -88,7 +88,7 @@ export default function NewPollPage() {
                 value={opt}
                 onChange={(e) => updateOption(i, e.target.value)}
                 placeholder={`Option ${i + 1}`}
-                className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+                className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
               />
             ))}
           </div>
@@ -106,7 +106,7 @@ export default function NewPollPage() {
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-slate-950 transition hover:bg-amber-400 disabled:opacity-50"
+          className="bg-amber-500 px-4 py-2 font-semibold text-slate-950 transition hover:bg-amber-400 disabled:opacity-50"
         >
           {loading ? "Creating..." : "Create Poll"}
         </button>

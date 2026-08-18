@@ -16,7 +16,7 @@ export default async function NotesPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold text-slate-100">
+      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-slate-100">
         📌 Manager Notes
       </h1>
 
@@ -40,7 +40,7 @@ export default async function NotesPage() {
             <Card key={note.id}>
               <div className="mb-1 flex items-center gap-2">
                 {note.pinned && (
-                  <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-400">
+                  <span className="border-2 border-slate-800 bg-yellow-400 px-2 py-0.5 text-xs font-bold uppercase text-slate-100">
                     Pinned
                   </span>
                 )}

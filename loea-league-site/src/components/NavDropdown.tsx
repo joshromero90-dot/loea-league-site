@@ -33,7 +33,7 @@ export default function NavDropdown({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1 whitespace-nowrap rounded-md px-3 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
+        className="flex items-center gap-1 whitespace-nowrap px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
         aria-haspopup="true"
         aria-expanded={open}
       >
@@ -53,13 +53,13 @@ export default function NavDropdown({
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-30 mt-1 min-w-[10rem] rounded-md border border-slate-800 bg-slate-900 py-1 shadow-lg">
+        <div className="absolute left-0 top-full z-30 mt-1 min-w-[10rem] border-2 border-slate-800 bg-slate-900 py-1 shadow-lg">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block whitespace-nowrap px-4 py-2 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
+              className="block whitespace-nowrap px-4 py-2 text-sm font-semibold text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
             >
               {link.label}
             </Link>

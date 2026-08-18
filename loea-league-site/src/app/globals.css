@@ -1,29 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #14150d;
-  --foreground: #f2efe2;
+  --background: #f7f5f0;
+  --foreground: #0f0f0f;
 }
 
 @theme {
-  /* Olive-dark neutrals, pulled from the badge's background green */
-  --color-slate-100: #f2efe2;
-  --color-slate-200: #dcd8bc;
-  --color-slate-300: #c2bfa0;
-  --color-slate-400: #a5a288;
-  --color-slate-500: #8c8a70;
-  --color-slate-700: #494a2e;
-  --color-slate-800: #34351f;
-  --color-slate-900: #212314;
-  --color-slate-950: #14150d;
+  /* Brutalist grid theme: off-white paper + black ink + a red-orange pop */
+  --color-slate-100: #0f0f0f;
+  --color-slate-200: #141414;
+  --color-slate-300: #1a1a1a;
+  --color-slate-400: #4a4a4a;
+  --color-slate-500: #6e6e6e;
+  --color-slate-700: #141414;
+  --color-slate-800: #141414;
+  --color-slate-900: #ffffff;
+  --color-slate-950: #f7f5f0;
 
-  /* Gold, pulled from the badge's lettering/border */
-  --color-amber-400: #dcaa42;
-  --color-amber-500: #c08331;
+  /* Red-orange pop — primary accent (buttons, links, active states) */
+  --color-amber-400: #ff5a3c;
+  --color-amber-500: #ef4423;
 
-  /* Red-orange, pulled from the badge's script text */
-  --color-red-400: #e37456;
-  --color-red-500: #ce4d33;
+  /* A second, cooler red kept for errors/destructive so it reads distinct
+     from the amber accent above */
+  --color-red-400: #d64f3d;
+  --color-red-500: #c0392b;
+
+  /* Yellow — used sparingly as a second color pop */
+  --color-yellow-400: #f5e400;
 }
 
 @theme inline {

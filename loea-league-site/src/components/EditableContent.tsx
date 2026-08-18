@@ -46,14 +46,14 @@ export default function EditableContent({
           value={body}
           onChange={(e) => setBody(e.target.value)}
           rows={16}
-          className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 font-mono text-sm text-slate-100 outline-none focus:border-amber-500"
+          className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 font-mono text-sm text-slate-100 outline-none focus:border-amber-500"
         />
         {error && <p className="text-sm text-red-400">{error}</p>}
         <div className="flex gap-2">
           <button
             onClick={save}
             disabled={loading}
-            className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+            className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
           >
             {loading ? "Saving..." : "Save"}
           </button>
@@ -62,7 +62,7 @@ export default function EditableContent({
               setBody(initialBody);
               setEditing(false);
             }}
-            className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
+            className="border-2 border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
           >
             Cancel
           </button>
@@ -73,7 +73,7 @@ export default function EditableContent({
 
   return (
     <div>
-      <div className="prose-league rounded-xl border border-slate-800 bg-slate-900/60 p-5 text-sm text-slate-200">
+      <div className="prose-league border-2 border-slate-800 bg-slate-900 p-5 text-sm text-slate-200">
         {body || "Nothing here yet."}
       </div>
       {canEdit && (

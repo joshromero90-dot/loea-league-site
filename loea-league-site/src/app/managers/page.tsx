@@ -33,7 +33,7 @@ export default async function ManagersPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-100">🙋 Managers</h1>
+        <h1 className="text-2xl font-black uppercase tracking-tight text-slate-100">🙋 Managers</h1>
         <p className="mt-1 text-sm text-slate-400">
           {managers.length} manager{managers.length === 1 ? "" : "s"} signed
           up so far.

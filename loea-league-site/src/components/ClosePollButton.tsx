@@ -20,7 +20,7 @@ export default function ClosePollButton({ pollId }: { pollId: string }) {
     <button
       onClick={closePoll}
       disabled={loading}
-      className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 transition hover:border-red-500 hover:text-red-400 disabled:opacity-50"
+      className="border-2 border-slate-700 px-4 py-2 text-sm text-slate-300 transition hover:border-red-500 hover:text-red-400 disabled:opacity-50"
     >
       {loading ? "Closing..." : "Close poll"}
     </button>

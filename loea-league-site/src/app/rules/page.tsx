@@ -14,7 +14,7 @@ export default async function RulesPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold text-slate-100">
+      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-slate-100">
         📜 {content?.title ?? "League Rules & Constitution"}
       </h1>
       <EditableContent

@@ -23,7 +23,7 @@ export default function CloseThreadButton({ threadId }: { threadId: string }) {
     <button
       onClick={close}
       disabled={loading}
-      className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 transition hover:border-red-500 hover:text-red-400 disabled:opacity-50"
+      className="border-2 border-slate-700 px-4 py-2 text-sm text-slate-300 transition hover:border-red-500 hover:text-red-400 disabled:opacity-50"
     >
       {loading ? "Closing..." : "Mark trade resolved / close thread"}
     </button>

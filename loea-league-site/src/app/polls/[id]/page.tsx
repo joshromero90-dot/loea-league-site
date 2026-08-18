@@ -59,7 +59,7 @@ export default async function PollPage({
 
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="mb-1 text-2xl font-bold text-slate-100">
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">
         {poll.question}
       </h1>
       <p className="mb-6 text-xs text-slate-500">

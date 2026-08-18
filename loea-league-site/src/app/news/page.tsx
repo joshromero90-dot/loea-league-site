@@ -54,7 +54,7 @@ export default async function NewsPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-1 text-2xl font-bold text-slate-100">📰 NFL News</h1>
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">📰 NFL News</h1>
       <p className="mb-6 text-sm text-slate-500">
         Auto-updated from ESPN and CBS Sports.
       </p>
@@ -76,7 +76,7 @@ export default async function NewsPage() {
             href={item.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="block rounded-lg border border-slate-800 bg-slate-900/60 p-4 transition hover:border-amber-500/60"
+            className="block border-2 border-slate-800 bg-slate-900 p-4 transition hover:border-amber-500/60"
           >
             <p className="font-medium text-slate-100">{item.title}</p>
             <p className="mt-1 text-xs text-slate-500">

@@ -65,12 +65,12 @@ export default function PollVoteForm({
             <button
               onClick={() => vote(opt.id)}
               disabled={isClosed || loading !== null}
-              className={`relative w-full overflow-hidden rounded-lg border px-4 py-3 text-left transition disabled:cursor-default ${
-                isMine ? "border-amber-500" : "border-slate-700 hover:border-amber-500/60"
+              className={`relative w-full overflow-hidden border-2 px-4 py-3 text-left transition disabled:cursor-default ${
+                isMine ? "border-amber-500" : "border-slate-700 hover:border-amber-500"
               }`}
             >
               <div
-                className="absolute inset-y-0 left-0 bg-amber-500/15"
+                className="absolute inset-y-0 left-0 bg-yellow-400/50"
                 style={{ width: `${pct}%` }}
               />
               <div className="relative flex items-center justify-between">

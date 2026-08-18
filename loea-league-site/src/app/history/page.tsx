@@ -97,7 +97,7 @@ export default async function HistoryPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-1 text-2xl font-bold text-slate-100">
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">
         🏅 Hall of Fame
       </h1>
       <p className="mb-6 text-sm text-slate-500">
@@ -128,11 +128,11 @@ export default async function HistoryPage() {
         {seasons.map((entry) => (
           <Card key={entry.seasonYear}>
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-amber-400">
+              <h2 className="text-lg font-black uppercase tracking-tight text-amber-500">
                 {entry.seasonYear} Season
               </h2>
               {entry.fromEspn && (
-                <span className="rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-400">
+                <span className="border-2 border-slate-800 px-2 py-0.5 text-xs font-bold uppercase text-slate-400">
                   ESPN sync
                 </span>
               )}

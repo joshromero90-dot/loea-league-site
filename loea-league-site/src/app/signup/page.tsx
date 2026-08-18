@@ -36,7 +36,7 @@ export default function SignupPage() {
   if (done) {
     return (
       <div className="mx-auto flex min-h-[80vh] max-w-md flex-col justify-center px-4 text-center">
-        <h1 className="mb-2 text-2xl font-bold text-slate-100">Check your email</h1>
+        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-slate-100">Check your email</h1>
         <p className="text-slate-400">
           We sent a confirmation link to <strong>{email}</strong>. Click it,
           then come back and log in.
@@ -50,7 +50,7 @@ export default function SignupPage() {
 
   return (
     <div className="mx-auto flex min-h-[80vh] max-w-md flex-col justify-center px-4">
-      <h1 className="mb-1 text-2xl font-bold text-slate-100">Join the League</h1>
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">Join the League</h1>
       <p className="mb-6 text-sm text-slate-400">Create your manager account</p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
@@ -59,7 +59,7 @@ export default function SignupPage() {
             required
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
           />
         </div>
         <div>
@@ -69,7 +69,7 @@ export default function SignupPage() {
           <input
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
           />
         </div>
         <div>
@@ -79,7 +79,7 @@ export default function SignupPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
           />
         </div>
         <div>
@@ -90,14 +90,14 @@ export default function SignupPage() {
             minLength={6}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
           />
         </div>
         {error && <p className="text-sm text-red-400">{error}</p>}
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-slate-950 transition hover:bg-amber-400 disabled:opacity-50"
+          className="bg-amber-500 px-4 py-2 font-semibold text-slate-950 transition hover:bg-amber-400 disabled:opacity-50"
         >
           {loading ? "Creating account..." : "Create account"}
         </button>

@@ -22,7 +22,7 @@ export default async function ResourcesPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold text-slate-100">
+      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-slate-100">
         🔗 Links & Resources
       </h1>
 
@@ -52,7 +52,7 @@ export default async function ResourcesPage() {
                 return (
                   <div
                     key={r.id}
-                    className="flex items-start justify-between gap-3 rounded-lg border border-slate-800 bg-slate-900/60 p-4"
+                    className="flex items-start justify-between gap-3 border-2 border-slate-800 bg-slate-900 p-4"
                   >
                     <div>
                       <a

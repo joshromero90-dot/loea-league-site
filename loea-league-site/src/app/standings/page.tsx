@@ -4,7 +4,7 @@ export default async function StandingsPage() {
   if (!espnConfigured()) {
     return (
       <div className="mx-auto max-w-xl text-center">
-        <h1 className="mb-2 text-2xl font-bold text-slate-100">
+        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-slate-100">
           📊 Standings
         </h1>
         <p className="text-sm text-slate-400">
@@ -38,7 +38,7 @@ export default async function StandingsPage() {
   if (errorMessage || !standings) {
     return (
       <div className="mx-auto max-w-xl text-center">
-        <h1 className="mb-2 text-2xl font-bold text-slate-100">
+        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-slate-100">
           📊 Standings
         </h1>
         <p className="text-sm text-red-400">{errorMessage}</p>
@@ -50,15 +50,15 @@ export default async function StandingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-1 text-2xl font-bold text-slate-100">📊 Standings</h1>
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">📊 Standings</h1>
       <p className="mb-6 text-sm text-slate-500">
         {seasonYear} season{currentWeek ? ` · Week ${currentWeek}` : ""} ·
         synced from ESPN
       </p>
 
-      <div className="overflow-hidden rounded-xl border border-slate-800">
+      <div className="overflow-hidden border-2 border-slate-800">
         <table className="w-full text-sm">
-          <thead className="bg-slate-900 text-left text-slate-400">
+          <thead className="bg-slate-800 text-left text-xs uppercase tracking-wide text-slate-950">
             <tr>
               <th className="px-4 py-3">#</th>
               <th className="px-4 py-3">Team</th>

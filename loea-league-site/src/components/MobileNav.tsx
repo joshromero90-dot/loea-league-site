@@ -19,13 +19,13 @@ export default function MobileNav({
     <div className="md:hidden">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="rounded-md border border-slate-700 px-3 py-1.5 text-sm text-slate-300"
+        className="border-2 border-slate-700 px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-slate-300"
         aria-label="Toggle menu"
       >
         {open ? "Close" : "Menu"}
       </button>
       {open && (
-        <div className="absolute left-0 right-0 top-full border-b border-slate-800 bg-slate-950 px-4 py-3">
+        <div className="absolute left-0 right-0 top-full border-b-2 border-slate-800 bg-slate-950 px-4 py-3">
           <Link
             href="/profile"
             onClick={() => setOpen(false)}
@@ -33,7 +33,7 @@ export default function MobileNav({
           >
             {profile.display_name}
             {profile.is_commissioner && (
-              <span className="ml-2 rounded-full bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-400">
+              <span className="ml-2 border-2 border-slate-800 bg-yellow-400 px-2 py-0.5 text-xs font-bold uppercase text-slate-100">
                 Commissioner
               </span>
             )}
@@ -50,7 +50,7 @@ export default function MobileNav({
                       key={child.href}
                       href={child.href}
                       onClick={() => setOpen(false)}
-                      className="rounded-md px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-amber-400"
+                      className="px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-amber-400"
                     >
                       {child.label}
                     </Link>
@@ -61,7 +61,7 @@ export default function MobileNav({
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-md px-2 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-amber-400"
+                  className="px-2 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-amber-400"
                 >
                   {link.label}
                 </Link>

@@ -65,7 +65,7 @@ export default function NewHallOfFameEntryForm() {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400"
+        className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400"
       >
         + Add a season
       </button>
@@ -73,12 +73,12 @@ export default function NewHallOfFameEntryForm() {
   }
 
   const inputClass =
-    "w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500";
+    "w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-5"
+      className="flex flex-col gap-3 border-2 border-slate-800 bg-slate-900 p-5"
     >
       <div>
         <label className="mb-1 block text-sm text-slate-300">Season year</label>
@@ -176,14 +176,14 @@ export default function NewHallOfFameEntryForm() {
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+          className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
         >
           {loading ? "Saving..." : "Save season"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
+          className="border-2 border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
         >
           Cancel
         </button>

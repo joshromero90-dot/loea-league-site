@@ -9,7 +9,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="mb-1 text-2xl font-bold text-slate-100">👤 Your Profile</h1>
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">👤 Your Profile</h1>
       <p className="mb-6 text-sm text-slate-500">
         Update how your name and team show up around the league.
       </p>

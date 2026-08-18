@@ -45,11 +45,11 @@ export default async function PollsPage() {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-100">🗳️ Polls</h1>
+        <h1 className="text-2xl font-black uppercase tracking-tight text-slate-100">🗳️ Polls</h1>
         {profile?.is_commissioner && (
           <Link
             href="/polls/new"
-            className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400"
+            className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400"
           >
             + New Poll
           </Link>
