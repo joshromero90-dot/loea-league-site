@@ -45,7 +45,7 @@ export default async function Nav() {
         <div className="flex min-w-0 items-center gap-6">
           <Link href="/" className="flex shrink-0 items-center">
             <Image
-              src="/logo-banner.png"
+              src="/LoEA6@4x.png"
               alt="The League of Extraordinary Assholes"
               width={880}
               height={325}
