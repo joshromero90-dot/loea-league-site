@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -18,7 +20,7 @@ export default function SignupPage() {
     setLoading(true);
     setError(null);
     const supabase = createClient();
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -28,6 +30,13 @@ export default function SignupPage() {
     setLoading(false);
     if (error) {
       setError(error.message);
+      return;
+    }
+    if (data.session) {
+      // Email confirmation is off in Supabase — the user is already signed
+      // in, so skip the "check your email" screen entirely.
+      router.push("/");
+      router.refresh();
       return;
     }
     setDone(true);
