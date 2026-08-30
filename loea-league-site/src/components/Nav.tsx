@@ -19,7 +19,7 @@ const LINKS: NavItem[] = [
   {
     label: "Updates",
     children: [
-      { href: "/notes", label: "Manager Notes" },
+      { href: "/notes", label: "Commissioner Notes" },
       { href: "/polls", label: "Polls" },
       { href: "/news", label: "News" },
     ],
@@ -61,6 +61,44 @@ export default async function Nav() {
                   <NavDropdown
                     key={link.label}
                     label={link.label}
+                    links={link.children}
+                  />
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="whitespace-nowrap px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
+            </nav>
+          )}
+        </div>
+
+        {profile && (
+          <div className="hidden shrink-0 items-center gap-3 md:flex">
+            <Link
+              href="/profile"
+              className="text-sm text-slate-400 transition hover:text-amber-400"
+            >
+              {profile.display_name}
+              {profile.is_commissioner && (
+                <span className="ml-2 border-2 border-slate-800 bg-yellow-400 px-2 py-0.5 text-xs font-bold uppercase text-slate-100">
+                  Commissioner
+                </span>
+              )}
+            </Link>
+            <SignOutButton />
+          </div>
+        )}
+
+        {profile && <MobileNav links={LINKS} profile={profile} />}
+      </div>
+    </header>
+  );
+}
                     links={link.children}
                   />
                 ) : (
