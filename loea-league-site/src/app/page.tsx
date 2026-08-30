@@ -45,60 +45,7 @@ export default async function Home() {
         </p>
       </div>
 
-      <Card className="mb-8">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-black uppercase tracking-tight text-slate-100">📊 Standings</h2>
-          <Link
-            href="/standings"
-            className="text-xs font-bold uppercase text-amber-500 hover:underline"
-          >
-            Full standings →
-          </Link>
-        </div>
-
-        {!espnConfigured() && (
-          <p className="text-sm text-slate-500">
-            Live standings aren&apos;t connected yet.
-          </p>
-        )}
-        {espnConfigured() && standingsError && (
-          <p className="text-sm text-red-400">{standingsError}</p>
-        )}
-        {standings && standings.teams.length > 0 && (
-          <div className="overflow-hidden border-2 border-slate-800">
-            <table className="w-full text-sm">
-              <thead className="bg-slate-800 text-left text-xs uppercase tracking-wide text-slate-950">
-                <tr>
-                  <th className="px-3 py-2">#</th>
-                  <th className="px-3 py-2">Team</th>
-                  <th className="px-3 py-2 text-right">W-L-T</th>
-                  <th className="px-3 py-2 text-right">PF</th>
-                </tr>
-              </thead>
-              <tbody>
-                {standings.teams.map((team, i) => (
-                  <tr
-                    key={team.id}
-                    className="border-t border-slate-800 text-slate-200"
-                  >
-                    <td className="px-3 py-2 text-slate-500">{i + 1}</td>
-                    <td className="px-3 py-2 font-medium">{team.name}</td>
-                    <td className="px-3 py-2 text-right">
-                      {team.wins}-{team.losses}
-                      {team.ties ? `-${team.ties}` : ""}
-                    </td>
-                    <td className="px-3 py-2 text-right">
-                      {team.pointsFor.toFixed(1)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </Card>
-
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="mb-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-black uppercase tracking-tight text-slate-100">📌 New Notes</h2>
@@ -155,6 +102,59 @@ export default async function Home() {
           )}
         </Card>
       </div>
+
+      <Card>
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="font-black uppercase tracking-tight text-slate-100">📊 Standings</h2>
+          <Link
+            href="/standings"
+            className="text-xs font-bold uppercase text-amber-500 hover:underline"
+          >
+            Full standings →
+          </Link>
+        </div>
+
+        {!espnConfigured() && (
+          <p className="text-sm text-slate-500">
+            Live standings aren&apos;t connected yet.
+          </p>
+        )}
+        {espnConfigured() && standingsError && (
+          <p className="text-sm text-red-400">{standingsError}</p>
+        )}
+        {standings && standings.teams.length > 0 && (
+          <div className="overflow-hidden border-2 border-slate-800">
+            <table className="w-full text-sm">
+              <thead className="bg-slate-800 text-left text-xs uppercase tracking-wide text-slate-950">
+                <tr>
+                  <th className="px-3 py-2">#</th>
+                  <th className="px-3 py-2">Team</th>
+                  <th className="px-3 py-2 text-right">W-L-T</th>
+                  <th className="px-3 py-2 text-right">PF</th>
+                </tr>
+              </thead>
+              <tbody>
+                {standings.teams.map((team, i) => (
+                  <tr
+                    key={team.id}
+                    className="border-t border-slate-800 text-slate-200"
+                  >
+                    <td className="px-3 py-2 text-slate-500">{i + 1}</td>
+                    <td className="px-3 py-2 font-medium">{team.name}</td>
+                    <td className="px-3 py-2 text-right">
+                      {team.wins}-{team.losses}
+                      {team.ties ? `-${team.ties}` : ""}
+                    </td>
+                    <td className="px-3 py-2 text-right">
+                      {team.pointsFor.toFixed(1)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
     </div>
   );
 }
