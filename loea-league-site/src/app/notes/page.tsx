@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getCurrentProfile } from "@/lib/profile";
 import { Card } from "@/components/Card";
 import NewNoteForm from "@/components/NewNoteForm";
-import { formatDistanceToNow } from "date-fns";
+import { format } from "date-fns";
 
 export default async function NotesPage() {
   const supabase = await createClient();
@@ -17,8 +17,11 @@ export default async function NotesPage() {
   return (
     <div className="mx-auto max-w-2xl">
       <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-slate-100">
-        📌 Manager Notes
+        📌 Commissioner Notes
       </h1>
+      <p className="mb-6 -mt-4 text-sm text-slate-500">
+        A running log of every note posted, newest first.
+      </p>
 
       {profile?.is_commissioner && (
         <div className="mb-8">
@@ -49,9 +52,7 @@ export default async function NotesPage() {
               <p className="prose-league text-sm text-slate-300">{note.body}</p>
               <p className="mt-3 text-xs text-slate-500">
                 {author?.display_name ?? "Commissioner"} ·{" "}
-                {formatDistanceToNow(new Date(note.created_at), {
-                  addSuffix: true,
-                })}
+                {format(new Date(note.created_at), "MMMM d, yyyy")}
               </p>
             </Card>
           );
