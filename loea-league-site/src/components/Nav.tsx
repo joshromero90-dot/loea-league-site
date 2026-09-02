@@ -47,10 +47,11 @@ export default async function Nav() {
             <Image
               src="/LoEA6@4x.png"
               alt="The League of Extraordinary Assholes"
-              width={880}
-              height={325}
+              width={649}
+              height={240}
               className="h-20 w-auto"
               priority
+              unoptimized
             />
           </Link>
 
