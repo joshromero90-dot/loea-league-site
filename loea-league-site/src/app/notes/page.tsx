@@ -41,6 +41,10 @@ export default async function NotesPage() {
             : note.profiles;
           return (
             <Card key={note.id}>
+              <p className="mb-2 text-xs text-slate-500">
+                {format(new Date(note.created_at), "MMMM d, yyyy")} ·{" "}
+                {author?.display_name ?? "Commissioner"}
+              </p>
               <div className="mb-1 flex items-center gap-2">
                 {note.pinned && (
                   <span className="border-2 border-slate-800 bg-yellow-400 px-2 py-0.5 text-xs font-bold uppercase text-slate-100">
@@ -50,10 +54,6 @@ export default async function NotesPage() {
                 <h2 className="font-semibold text-slate-100">{note.title}</h2>
               </div>
               <p className="prose-league text-sm text-slate-300">{note.body}</p>
-              <p className="mt-3 text-xs text-slate-500">
-                {author?.display_name ?? "Commissioner"} ·{" "}
-                {format(new Date(note.created_at), "MMMM d, yyyy")}
-              </p>
             </Card>
           );
         })}
