@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getCurrentProfile } from "@/lib/profile";
 import { Card } from "@/components/Card";
 import NewNoteForm from "@/components/NewNoteForm";
+import TogglePinButton from "@/components/TogglePinButton";
 import { format } from "date-fns";
 
 export default async function NotesPage() {
@@ -41,10 +42,15 @@ export default async function NotesPage() {
             : note.profiles;
           return (
             <Card key={note.id}>
-              <p className="mb-2 text-xs text-slate-500">
-                {format(new Date(note.created_at), "MMMM d, yyyy")} ·{" "}
-                {author?.display_name ?? "Commissioner"}
-              </p>
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <p className="text-xs text-slate-500">
+                  {format(new Date(note.created_at), "MMMM d, yyyy")} ·{" "}
+                  {author?.display_name ?? "Commissioner"}
+                </p>
+                {profile?.is_commissioner && (
+                  <TogglePinButton noteId={note.id} pinned={note.pinned} />
+                )}
+              </div>
               <div className="mb-1 flex items-center gap-2">
                 {note.pinned && (
                   <span className="border-2 border-slate-800 bg-yellow-400 px-2 py-0.5 text-xs font-bold uppercase text-slate-100">
