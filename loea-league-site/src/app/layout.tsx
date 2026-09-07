@@ -19,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 (Est. 2013)
               </span>
               <span className="text-sm font-black uppercase tracking-tight text-slate-100">
-                Talk smack. Talk stats. Win the league.
+                It&apos;s all about offensive coordinators, bub. - Kohl Wingfield
               </span>
             </div>
             <div className="flex items-center bg-yellow-400 px-4 py-3 text-xs font-bold uppercase tracking-wide text-slate-100">
