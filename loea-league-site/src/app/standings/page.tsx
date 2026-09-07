@@ -69,8 +69,17 @@ export default async function StandingsPage() {
           </thead>
           <tbody>
             {teams.map((team, i) => (
-              <tr key={team.id} className="border-t border-slate-800 text-slate-200">
-                <td className="px-4 py-3 text-slate-500">{i + 1}</td>
+              <tr
+                key={team.id}
+                className={
+                  i === 0
+                    ? "border-t border-slate-800 bg-amber-500 text-slate-950"
+                    : "border-t border-slate-800 text-slate-200"
+                }
+              >
+                <td className={i === 0 ? "px-4 py-3 font-black" : "px-4 py-3 text-slate-500"}>
+                  {i + 1}
+                </td>
                 <td className="px-4 py-3 font-medium">{team.name}</td>
                 <td className="px-4 py-3 text-right">
                   {team.wins}-{team.losses}
