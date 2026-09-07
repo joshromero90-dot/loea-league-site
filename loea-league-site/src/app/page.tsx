@@ -183,7 +183,7 @@ export default async function Home() {
             Take the chair.
           </h2>
           <p className="mt-3 text-sm font-semibold text-slate-950/80">
-            One trophy, one champion, twelve months of bragging rights.
+            Current Champion: Ryan Long AKA OJ&apos;s house OJ Didn&apos;t Do It.
           </p>
         </div>
       </div>
