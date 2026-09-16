@@ -129,7 +129,7 @@ async function fetchEspnSeason(
  * the current ESPN_SEASON_YEAR. Seasons ESPN has no data for are silently
  * skipped rather than failing the whole page.
  */
-export async function getEspnHallOfFameHistory(): Promise<
+export async function getEspnHallOfFameHistory(): Promise
   EspnHallOfFameSeason[]
 > {
   const leagueId = process.env.ESPN_LEAGUE_ID;
@@ -242,6 +242,190 @@ export async function getEspnRoster(
       };
     })
     .sort((a, b) => (a.isStarter === b.isStarter ? 0 : a.isStarter ? -1 : 1));
+}
+
+export type EspnActivityItem = {
+  id: string;
+  kind: "trade" | "waiver" | "add" | "drop";
+  summary: string;
+  date: string; // ISO timestamp
+};
+
+type EspnActivityTransactionItem = {
+  playerId?: number;
+  type?: string; // "ADD" | "DROP"
+  fromTeamId?: number;
+  toTeamId?: number;
+};
+
+type EspnActivityTransaction = {
+  id?: string;
+  type?: string; // "WAIVER" | "FREEAGENT" | "TRADE" | "ROSTER"
+  status?: string; // "EXECUTED" | "PENDING" | ...
+  proposedDate?: number;
+  teamId?: number;
+  bidAmount?: number;
+  items?: EspnActivityTransactionItem[];
+};
+
+type EspnActivityResponse = {
+  transactions?: EspnActivityTransaction[];
+  teams?: {
+    id: number;
+    name?: string;
+    location?: string;
+    nickname?: string;
+  }[];
+};
+
+type EspnPlayerLookupEntry = { id: number; fullName?: string };
+
+async function getPlayerNames(
+  seasonYear: string,
+  playerIds: number[]
+): Promise<Map<number, string>> {
+  const map = new Map<number, string>();
+  const uniqueIds = [...new Set(playerIds)].filter((id) => id > 0);
+  if (uniqueIds.length === 0) return map;
+
+  const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${seasonYear}/players?scoringPeriodId=0&view=players_wl`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        ...espnHeaders(),
+        "X-Fantasy-Filter": JSON.stringify({
+          players: { filterIds: { value: uniqueIds } },
+        }),
+      },
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return map;
+    const data: EspnPlayerLookupEntry[] = await res.json();
+    for (const p of data) {
+      if (p.id && p.fullName) map.set(p.id, p.fullName);
+    }
+  } catch {
+    // best-effort — descriptions fall back to "Player #id" if this fails
+  }
+  return map;
+}
+
+/**
+ * Fetches the league's recent transaction activity (trades, waiver claims,
+ * free agent adds/drops) for the "Asshole News" feed. Best-effort: returns
+ * an empty array rather than throwing if ESPN isn't configured or the
+ * request fails, so the news page can show a friendly fallback instead of
+ * an error.
+ */
+export async function getEspnRecentActivity(
+  limit = 20
+): Promise<EspnActivityItem[]> {
+  const leagueId = process.env.ESPN_LEAGUE_ID;
+  const seasonYear = process.env.ESPN_SEASON_YEAR;
+  if (!leagueId || !seasonYear) return [];
+
+  const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${seasonYear}/segments/0/leagues/${leagueId}?view=mTeam&view=mTransactions2`;
+
+  try {
+    const res = await fetch(url, {
+      headers: espnHeaders(),
+      next: { revalidate: 300 }, // refresh every 5 minutes
+    });
+    if (!res.ok) return [];
+
+    const data: EspnActivityResponse = await res.json();
+
+    const teamName = (id?: number) => {
+      const t = data.teams?.find((team) => team.id === id);
+      if (!t) return id ? `Team #${id}` : "Unknown Team";
+      return (
+        t.name ?? (`${t.location ?? ""} ${t.nickname ?? ""}`.trim() || `Team #${id}`)
+      );
+    };
+
+    const executed = (data.transactions ?? [])
+      .filter((t) => t.status === "EXECUTED")
+      .sort((a, b) => (b.proposedDate ?? 0) - (a.proposedDate ?? 0))
+      .slice(0, limit);
+
+    const allPlayerIds = executed.flatMap((t) =>
+      (t.items ?? []).map((i) => i.playerId ?? 0)
+    );
+    const playerNames = await getPlayerNames(seasonYear, allPlayerIds);
+    const playerName = (id?: number) =>
+      (id && playerNames.get(id)) || (id ? `Player #${id}` : "a player");
+
+    return executed.map((t) => {
+      const date = t.proposedDate
+        ? new Date(t.proposedDate).toISOString()
+        : new Date().toISOString();
+      const items = t.items ?? [];
+      const fallbackId = `${t.id ?? t.teamId ?? "txn"}-${date}`;
+
+      if (t.type === "TRADE") {
+        const moves = items
+          .filter((i) => i.fromTeamId && i.toTeamId)
+          .map(
+            (i) =>
+              `${playerName(i.playerId)} (${teamName(i.fromTeamId)} → ${teamName(
+                i.toTeamId
+              )})`
+          );
+        return {
+          id: fallbackId,
+          kind: "trade" as const,
+          summary:
+            moves.length > 0 ? `Trade: ${moves.join(", ")}` : "Trade completed.",
+          date,
+        };
+      }
+
+      const added = items.find((i) => i.type === "ADD");
+      const dropped = items.find((i) => i.type === "DROP");
+      const team = teamName(t.teamId);
+      const kind: EspnActivityItem["kind"] =
+        t.type === "WAIVER" ? "waiver" : added ? "add" : "drop";
+      const bidNote =
+        kind === "waiver" && t.bidAmount ? ` ($${t.bidAmount} waiver)` : "";
+
+      if (added && dropped) {
+        return {
+          id: fallbackId,
+          kind,
+          summary: `${team} added ${playerName(added.playerId)}, dropped ${playerName(
+            dropped.playerId
+          )}${bidNote}`,
+          date,
+        };
+      }
+      if (added) {
+        return {
+          id: fallbackId,
+          kind,
+          summary: `${team} added ${playerName(added.playerId)}${bidNote}`,
+          date,
+        };
+      }
+      if (dropped) {
+        return {
+          id: fallbackId,
+          kind: "drop" as const,
+          summary: `${team} dropped ${playerName(dropped.playerId)}`,
+          date,
+        };
+      }
+
+      return {
+        id: fallbackId,
+        kind: "add" as const,
+        summary: `${team} made a roster move.`,
+        date,
+      };
+    });
+  } catch {
+    return [];
+  }
 }
 
 export async function getEspnStandings(): Promise<EspnStandings> {
