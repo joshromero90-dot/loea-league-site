@@ -152,7 +152,7 @@ export default async function NewsPage() {
 
         <div className="flex flex-col gap-3">
           {news.map((item, i) => (
-            
+            <a
               key={i}
               href={item.link}
               target="_blank"
