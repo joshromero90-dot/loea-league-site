@@ -129,7 +129,7 @@ async function fetchEspnSeason(
  * the current ESPN_SEASON_YEAR. Seasons ESPN has no data for are silently
  * skipped rather than failing the whole page.
  */
-export async function getEspnHallOfFameHistory(): Promise
+export async function getEspnHallOfFameHistory(): Promise<
   EspnHallOfFameSeason[]
 > {
   const leagueId = process.env.ESPN_LEAGUE_ID;
