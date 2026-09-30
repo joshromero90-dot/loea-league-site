@@ -70,3 +70,25 @@
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .neo-card-link:hover, button:active:not(:disabled) { transform: none; }
 }
+
+@layer components {
+  .league-ticker { display: flex; align-items: center; gap: .75rem; padding: .4rem .75rem; }
+  .league-ticker-window { flex: 1; min-width: 0; overflow: hidden; }
+  .league-ticker-track { display: flex; width: max-content; animation: league-scroll 40s linear infinite; }
+  .league-ticker-group { flex-shrink: 0; display: flex; align-items: center; white-space: nowrap; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .league-ticker-separator { display: inline-block; padding: 0 2rem; }
+  .league-ticker-toggle { min-height: 44px; padding: .3rem .6rem; border-width: 2px; box-shadow: none; font-size: .7rem; flex-shrink: 0; }
+  .league-ticker[data-paused="true"] .league-ticker-track,
+  .league-ticker:hover .league-ticker-track,
+  .league-ticker:focus-within .league-ticker-track { animation-play-state: paused; }
+}
+@keyframes league-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .league-ticker-track { width: 100%; transform: none; }
+  .league-ticker-group { white-space: normal; flex-wrap: wrap; gap: .5rem 0; }
+  .league-ticker-group + .league-ticker-group, .league-ticker-toggle { display: none; }
+  .league-ticker-separator { padding: 0 .75rem; }
+}
