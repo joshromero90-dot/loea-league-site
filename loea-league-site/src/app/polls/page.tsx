@@ -45,23 +45,23 @@ export default async function PollsPage() {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-black uppercase tracking-tight text-slate-100">🗳️ Polls</h1>
+        <h1 className="text-2xl font-black uppercase tracking-tight text-neo-ink">🗳️ Polls</h1>
         {profile?.is_commissioner && (
           <Link
             href="/polls/new"
-            className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400"
+            className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow"
           >
             + New Poll
           </Link>
         )}
       </div>
 
-      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+      <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-neo-ink">
         Open
       </h2>
       <div className="mb-8 flex flex-col gap-6">
         {open.length === 0 && (
-          <p className="text-sm text-slate-500">No open polls right now.</p>
+          <p className="text-sm text-neo-ink">No open polls right now.</p>
         )}
         {open.map((poll) => {
           const pollOptions = (allOptions ?? []).filter(
@@ -89,7 +89,7 @@ export default async function PollsPage() {
 
           return (
             <Card key={poll.id}>
-              <p className="mb-4 font-medium text-slate-100">
+              <p className="mb-4 font-bold text-neo-ink">
                 {poll.question}
               </p>
               <PollVoteForm
@@ -106,15 +106,15 @@ export default async function PollsPage() {
 
       {closed.length > 0 && (
         <>
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+          <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-neo-ink">
             Closed
           </h2>
           <div className="flex flex-col gap-3">
             {closed.map((poll) => (
               <Link key={poll.id} href={`/polls/${poll.id}`}>
-                <Card className="opacity-70 transition hover:border-amber-500/60 hover:opacity-100">
-                  <p className="font-medium text-slate-100">{poll.question}</p>
-                  <p className="mt-1 text-xs text-slate-500">
+                <Card className="opacity-70 transition hover:border-neo-ink hover:opacity-100">
+                  <p className="font-bold text-neo-ink">{poll.question}</p>
+                  <p className="mt-1 text-xs text-neo-ink">
                     {poll.poll_votes?.[0]?.count ?? 0} vote(s) · closed
                   </p>
                 </Card>

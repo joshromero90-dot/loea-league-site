@@ -65,7 +65,7 @@ export default function NewHallOfFameEntryForm() {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400"
+        className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow"
       >
         + Add a season
       </button>
@@ -73,15 +73,15 @@ export default function NewHallOfFameEntryForm() {
   }
 
   const inputClass =
-    "w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500";
+    "w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 border-2 border-slate-800 bg-slate-900 p-5"
+      className="flex flex-col gap-3 border-4 border-neo-ink bg-white p-5"
     >
       <div>
-        <label className="mb-1 block text-sm text-slate-300">Season year</label>
+        <label className="mb-1 block text-sm text-neo-ink">Season year</label>
         <input
           type="number"
           required
@@ -91,7 +91,7 @@ export default function NewHallOfFameEntryForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm text-slate-300">
+        <label className="mb-1 block text-sm text-neo-ink">
           Champion team (leave blank if ESPN already has this season)
         </label>
         <input
@@ -101,7 +101,7 @@ export default function NewHallOfFameEntryForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm text-slate-300">
+        <label className="mb-1 block text-sm text-neo-ink">
           Champion manager (optional)
         </label>
         <input
@@ -111,7 +111,7 @@ export default function NewHallOfFameEntryForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm text-slate-300">
+        <label className="mb-1 block text-sm text-neo-ink">
           Runner-up (optional)
         </label>
         <input
@@ -121,7 +121,7 @@ export default function NewHallOfFameEntryForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm text-slate-300">
+        <label className="mb-1 block text-sm text-neo-ink">
           Runner-up manager (optional)
         </label>
         <input
@@ -131,7 +131,7 @@ export default function NewHallOfFameEntryForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm text-slate-300">
+        <label className="mb-1 block text-sm text-neo-ink">
           Last place (optional)
         </label>
         <input
@@ -141,7 +141,7 @@ export default function NewHallOfFameEntryForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm text-slate-300">
+        <label className="mb-1 block text-sm text-neo-ink">
           Last place manager (optional)
         </label>
         <input
@@ -151,7 +151,7 @@ export default function NewHallOfFameEntryForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm text-slate-300">
+        <label className="mb-1 block text-sm text-neo-ink">
           Punishment (optional)
         </label>
         <input
@@ -161,7 +161,7 @@ export default function NewHallOfFameEntryForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm text-slate-300">
+        <label className="mb-1 block text-sm text-neo-ink">
           Notes (optional)
         </label>
         <textarea
@@ -171,19 +171,19 @@ export default function NewHallOfFameEntryForm() {
           className={inputClass}
         />
       </div>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-neo-error">{error}</p>}
       <div className="flex gap-2">
         <button
           type="submit"
           disabled={loading}
-          className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+          className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow disabled:opacity-50"
         >
           {loading ? "Saving..." : "Save season"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="border-2 border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
+          className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-violet"
         >
           Cancel
         </button>

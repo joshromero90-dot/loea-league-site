@@ -40,23 +40,23 @@ export default async function Nav() {
   const profile = await getCurrentProfile();
 
   return (
-    <header className="border-b-2 border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-20">
+    <header className="league-nav border-b-4 border-neo-ink bg-neo-paper sticky top-0 z-20">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <div className="flex min-w-0 items-center gap-6">
-          <Link href="/" className="flex shrink-0 items-center">
+        <div className="flex min-w-0 items-center gap-4">
+          <Link href="/" className="flex shrink-0 items-center border-4 border-neo-ink bg-neo-yellow p-2 shadow-neo-sm">
             <Image
               src="/LoEA6@4x.png"
               alt="The League of Extraordinary Assholes"
               width={649}
               height={240}
-              className="h-20 w-auto"
+              className="h-12 w-auto sm:h-16"
               priority
               unoptimized
             />
           </Link>
 
           {profile && (
-            <nav className="hidden flex-wrap items-center gap-1 md:flex">
+            <nav className="hidden flex-wrap items-center gap-1 xl:flex">
               {LINKS.map((link) =>
                 link.children ? (
                   <NavDropdown
@@ -68,7 +68,7 @@ export default async function Nav() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="whitespace-nowrap px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
+                    className="whitespace-nowrap px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-neo-ink transition hover:bg-neo-yellow hover:text-neo-ink"
                   >
                     {link.label}
                   </Link>
@@ -79,14 +79,14 @@ export default async function Nav() {
         </div>
 
         {profile && (
-          <div className="hidden shrink-0 items-center gap-3 md:flex">
+          <div className="hidden shrink-0 items-center gap-3 xl:flex">
             <Link
               href="/profile"
-              className="text-sm text-slate-400 transition hover:text-amber-400"
+              className="text-sm text-neo-ink transition hover:text-neo-ink"
             >
               {profile.display_name}
               {profile.is_commissioner && (
-                <span className="ml-2 border-2 border-slate-800 bg-yellow-400 px-2 py-0.5 text-xs font-bold uppercase text-slate-100">
+                <span className="ml-2 border-4 border-neo-ink bg-neo-yellow px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
                   Commissioner
                 </span>
               )}

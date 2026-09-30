@@ -33,8 +33,8 @@ export default async function ManagersPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-black uppercase tracking-tight text-slate-100">🙋 Managers</h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <h1 className="text-2xl font-black uppercase tracking-tight text-neo-ink">🙋 Managers</h1>
+        <p className="mt-1 text-sm text-neo-ink">
           {managers.length} manager{managers.length === 1 ? "" : "s"} signed
           up so far.
           {hasEspn &&
@@ -43,7 +43,7 @@ export default async function ManagersPage() {
       </div>
 
       {managers.length === 0 ? (
-        <p className="text-sm text-slate-500">No one has signed up yet.</p>
+        <p className="text-sm text-neo-ink">No one has signed up yet.</p>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {managers.map((manager) => (

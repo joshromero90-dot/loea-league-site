@@ -22,7 +22,7 @@ export default async function ResourcesPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-slate-100">
+      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-neo-ink">
         🔗 Links & Resources
       </h1>
 
@@ -31,7 +31,7 @@ export default async function ResourcesPage() {
       </div>
 
       {byCategory.size === 0 && (
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-neo-ink">
           No links yet — add rankings, cheat sheets, or tools above.
         </p>
       )}
@@ -39,7 +39,7 @@ export default async function ResourcesPage() {
       <div className="flex flex-col gap-8">
         {Array.from(byCategory.entries()).map(([category, items]) => (
           <div key={category}>
-            <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+            <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-neo-ink">
               {category}
             </h2>
             <div className="flex flex-col gap-2">
@@ -52,23 +52,23 @@ export default async function ResourcesPage() {
                 return (
                   <div
                     key={r.id}
-                    className="flex items-start justify-between gap-3 border-2 border-slate-800 bg-slate-900 p-4"
+                    className="flex items-start justify-between gap-3 neo-card"
                   >
                     <div>
                       <a
                         href={r.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-medium text-amber-400 hover:underline"
+                        className="font-bold text-neo-ink hover:underline"
                       >
                         {r.title}
                       </a>
                       {r.description && (
-                        <p className="mt-1 text-sm text-slate-400">
+                        <p className="mt-1 text-sm text-neo-ink">
                           {r.description}
                         </p>
                       )}
-                      <p className="mt-1 text-xs text-slate-500">
+                      <p className="mt-1 text-xs text-neo-ink">
                         Added by {author?.display_name ?? "a manager"}
                       </p>
                     </div>

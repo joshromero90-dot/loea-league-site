@@ -17,10 +17,10 @@ export default async function NotesPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-slate-100">
+      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-neo-ink">
         📌 Commissioner Notes
       </h1>
-      <p className="mb-6 -mt-4 text-sm text-slate-500">
+      <p className="mb-6 -mt-4 text-sm text-neo-ink">
         A running log of every note posted, newest first. Older notes
         collapse — hover one to read it.
       </p>
@@ -33,7 +33,7 @@ export default async function NotesPage() {
 
       <div className="flex flex-col gap-4">
         {(!notes || notes.length === 0) && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-neo-ink">
             No announcements yet. Check back soon.
           </p>
         )}
@@ -42,7 +42,7 @@ export default async function NotesPage() {
             ? note.profiles[0]
             : note.profiles;
           const meta = (
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-neo-ink">
               {format(new Date(note.created_at), "MMMM d, yyyy")} ·{" "}
               {author?.display_name ?? "Commissioner"}
             </p>
@@ -50,11 +50,11 @@ export default async function NotesPage() {
           const titleRow = (
             <div className="mb-1 flex items-center gap-2">
               {note.pinned && (
-                <span className="border-2 border-slate-800 bg-yellow-400 px-2 py-0.5 text-xs font-bold uppercase text-slate-100">
+                <span className="border-4 border-neo-ink bg-neo-yellow px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
                   Pinned
                 </span>
               )}
-              <h2 className="font-semibold text-slate-100">{note.title}</h2>
+              <h2 className="font-bold text-neo-ink">{note.title}</h2>
             </div>
           );
 
@@ -72,7 +72,7 @@ export default async function NotesPage() {
                   )}
                 </div>
                 {titleRow}
-                <p className="prose-league text-sm text-slate-300">
+                <p className="prose-league text-sm text-neo-ink">
                   {note.body}
                 </p>
               </Card>
@@ -80,7 +80,7 @@ export default async function NotesPage() {
           }
 
           return (
-            <div key={note.id} className="group border-2 border-slate-800 bg-slate-900 p-5 transition-colors hover:border-amber-500">
+            <div key={note.id} className="group neo-card transition-colors hover:border-neo-ink">
               <div className="mb-2 flex items-center justify-between gap-2">
                 {meta}
                 {profile?.is_commissioner && (
@@ -90,7 +90,7 @@ export default async function NotesPage() {
               {titleRow}
               <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr]">
                 <div className="overflow-hidden">
-                  <p className="prose-league pt-2 text-sm text-slate-300">
+                  <p className="prose-league pt-2 text-sm text-neo-ink">
                     {note.body}
                   </p>
                 </div>

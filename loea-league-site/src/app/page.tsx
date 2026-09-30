@@ -2,6 +2,7 @@ import { getCurrentProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
 import { Card } from "@/components/Card";
 import Link from "next/link";
+import Image from "next/image";
 import { espnConfigured, getEspnStandings, type EspnStandings } from "@/lib/espn";
 
 export default async function Home() {
@@ -36,22 +37,23 @@ export default async function Home() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-4xl font-black uppercase tracking-tight text-slate-100 sm:text-5xl">
+      <div className="league-hero mb-10">
+        <span className="neo-sticker">The League of Extraordinary Assholes</span>
+        <h1 className="text-4xl font-black uppercase tracking-tight text-neo-ink sm:text-5xl">
           Welcome back{profile ? `, ${profile.display_name}` : ""} 🏆
         </h1>
-        <p className="mt-1 text-slate-400">
+        <p className="mt-1 text-neo-ink">
           Everything for The League of Extraordinary Assholes, in one place.
         </p>
       </div>
 
-      <div className="mb-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card>
+      <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-[3fr_2fr]">
+        <Card className="bg-neo-yellow">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-black uppercase tracking-tight text-slate-100">📌 New Notes</h2>
+            <h2 className="font-black uppercase tracking-tight text-neo-ink">📌 New Notes</h2>
             <Link
               href="/notes"
-              className="text-xs font-bold uppercase text-amber-500 hover:underline"
+              className="text-xs font-bold uppercase text-neo-ink hover:underline"
             >
               All notes →
             </Link>
@@ -62,7 +64,7 @@ export default async function Home() {
                 <li key={n.id}>
                   <Link
                     href="/notes"
-                    className="text-sm text-amber-400 hover:underline"
+                    className="text-sm text-neo-ink hover:underline"
                   >
                     {n.title}
                   </Link>
@@ -70,16 +72,16 @@ export default async function Home() {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-slate-500">No notes yet.</p>
+            <p className="text-sm text-neo-ink">No notes yet.</p>
           )}
         </Card>
 
-        <Card>
+        <Card className="bg-neo-red">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-black uppercase tracking-tight text-slate-100">🗳️ Open Polls</h2>
+            <h2 className="font-black uppercase tracking-tight text-neo-ink">🗳️ Open Polls</h2>
             <Link
               href="/polls"
-              className="text-xs font-bold uppercase text-amber-500 hover:underline"
+              className="text-xs font-bold uppercase text-neo-ink hover:underline"
             >
               All polls →
             </Link>
@@ -90,7 +92,7 @@ export default async function Home() {
                 <li key={p.id}>
                   <Link
                     href="/polls"
-                    className="text-sm text-amber-400 hover:underline"
+                    className="text-sm text-neo-ink hover:underline"
                   >
                     {p.question}
                   </Link>
@@ -98,34 +100,34 @@ export default async function Home() {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-slate-500">No open polls.</p>
+            <p className="text-sm text-neo-ink">No open polls.</p>
           )}
         </Card>
       </div>
 
       <Card>
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-black uppercase tracking-tight text-slate-100">📊 Standings</h2>
+          <h2 className="font-black uppercase tracking-tight text-neo-ink">📊 Standings</h2>
           <Link
             href="/standings"
-            className="text-xs font-bold uppercase text-amber-500 hover:underline"
+            className="text-xs font-bold uppercase text-neo-ink hover:underline"
           >
             Full standings →
           </Link>
         </div>
 
         {!espnConfigured() && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-neo-ink">
             Live standings aren&apos;t connected yet.
           </p>
         )}
         {espnConfigured() && standingsError && (
-          <p className="text-sm text-red-400">{standingsError}</p>
+          <p className="text-sm text-neo-error">{standingsError}</p>
         )}
         {standings && standings.teams.length > 0 && (
-          <div className="overflow-hidden border-2 border-slate-800">
+          <div className="league-table">
             <table className="w-full text-sm">
-              <thead className="bg-slate-800 text-left text-xs uppercase tracking-wide text-slate-950">
+              <thead className="bg-neo-yellow text-left text-xs uppercase tracking-wide text-neo-ink">
                 <tr>
                   <th className="px-3 py-2">#</th>
                   <th className="px-3 py-2">Team</th>
@@ -139,14 +141,14 @@ export default async function Home() {
                     key={team.id}
                     className={
                       i === 0
-                        ? "border-t border-slate-800 bg-amber-500 text-slate-950"
-                        : "border-t border-slate-800 text-slate-200"
+                        ? "border-t border-neo-ink bg-neo-red text-neo-ink"
+                        : "border-t border-neo-ink text-neo-ink"
                     }
                   >
-                    <td className={i === 0 ? "px-3 py-2 font-black" : "px-3 py-2 text-slate-500"}>
+                    <td className={i === 0 ? "px-3 py-2 font-black" : "px-3 py-2 text-neo-ink"}>
                       {i + 1}
                     </td>
-                    <td className="px-3 py-2 font-medium">{team.name}</td>
+                    <td className="px-3 py-2 font-bold">{team.name}</td>
                     <td className="px-3 py-2 text-right">
                       {team.wins}-{team.losses}
                       {team.ties ? `-${team.ties}` : ""}
@@ -162,9 +164,9 @@ export default async function Home() {
         )}
       </Card>
 
-      <div className="mt-8 grid grid-cols-1 border-2 border-slate-800 sm:grid-cols-2">
-        <div className="bg-slate-100 p-2">
-          <img
+      <div className="prize-panel mt-10 grid grid-cols-1 sm:grid-cols-[3fr_2fr]">
+        <div className="bg-white p-2">
+          <Image
             src="/trophy.jpg"
             alt="The league championship trophy: a guy in a recliner wearing a football helmet, working a laptop"
             width={900}
@@ -173,16 +175,16 @@ export default async function Home() {
             className="h-full w-full object-cover"
           />
         </div>
-        <div className="flex flex-col justify-center bg-amber-500 p-6 sm:p-8">
-          <span className="text-xs font-bold uppercase tracking-wide text-slate-950/70">
+        <div className="flex flex-col justify-center bg-neo-red p-6 sm:p-8">
+          <span className="text-xs font-bold uppercase tracking-wide text-neo-ink">
             The Prize
           </span>
-          <h2 className="mt-1 text-2xl font-black uppercase leading-tight tracking-tight text-slate-950 sm:text-3xl">
+          <h2 className="mt-1 text-2xl font-black uppercase leading-tight tracking-tight text-neo-ink sm:text-3xl">
             Win the league.
             <br />
             Take the chair.
           </h2>
-          <p className="mt-3 text-sm font-semibold text-slate-950/80">
+          <p className="mt-3 text-sm font-bold text-neo-ink">
             Current Champion: Ryan Long AKA OJ&apos;s house OJ Didn&apos;t Do It.
           </p>
         </div>

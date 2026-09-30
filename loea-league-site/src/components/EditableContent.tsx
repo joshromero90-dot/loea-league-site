@@ -46,14 +46,14 @@ export default function EditableContent({
           value={body}
           onChange={(e) => setBody(e.target.value)}
           rows={16}
-          className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 font-mono text-sm text-slate-100 outline-none focus:border-amber-500"
+          className="w-full border-4 border-neo-ink bg-white px-3 py-2 font-mono text-sm text-neo-ink outline-none focus:border-neo-ink"
         />
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && <p className="text-sm text-neo-error">{error}</p>}
         <div className="flex gap-2">
           <button
             onClick={save}
             disabled={loading}
-            className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+            className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow disabled:opacity-50"
           >
             {loading ? "Saving..." : "Save"}
           </button>
@@ -62,7 +62,7 @@ export default function EditableContent({
               setBody(initialBody);
               setEditing(false);
             }}
-            className="border-2 border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
+            className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-violet"
           >
             Cancel
           </button>
@@ -73,13 +73,13 @@ export default function EditableContent({
 
   return (
     <div>
-      <div className="prose-league border-2 border-slate-800 bg-slate-900 p-5 text-sm text-slate-200">
+      <div className="prose-league border-4 border-neo-ink bg-white p-5 text-sm text-neo-ink">
         {body || "Nothing here yet."}
       </div>
       {canEdit && (
         <button
           onClick={() => setEditing(true)}
-          className="mt-3 text-sm text-amber-400 hover:underline"
+          className="mt-3 text-sm text-neo-ink hover:underline"
         >
           Edit
         </button>

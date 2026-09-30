@@ -16,7 +16,7 @@ export default async function TradeBoardPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-slate-100">
+      <h1 className="mb-6 text-2xl font-black uppercase tracking-tight text-neo-ink">
         🔄 Trade Board
       </h1>
 
@@ -26,7 +26,7 @@ export default async function TradeBoardPage() {
 
       <div className="flex flex-col gap-3">
         {(!threads || threads.length === 0) && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-neo-ink">
             No trade talk yet. Start a thread above.
           </p>
         )}
@@ -36,21 +36,21 @@ export default async function TradeBoardPage() {
             : thread.profiles;
           return (
             <Link key={thread.id} href={`/trade-board/${thread.id}`}>
-              <Card className="transition hover:border-amber-500/60">
+              <Card className="transition hover:border-neo-ink">
                 <div className="flex items-center justify-between">
-                  <p className="font-medium text-slate-100">
+                  <p className="font-bold text-neo-ink">
                     {thread.title}
                     {thread.is_closed && (
-                      <span className="ml-2 text-xs text-slate-500">
+                      <span className="ml-2 text-xs text-neo-ink">
                         (closed)
                       </span>
                     )}
                   </p>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-neo-ink">
                     {thread.trade_messages?.[0]?.count ?? 0} replies
                   </span>
                 </div>
-                <p className="mt-1 text-xs text-slate-500">
+                <p className="mt-1 text-xs text-neo-ink">
                   Started by {author?.display_name ?? "a manager"} ·{" "}
                   {formatDistanceToNow(new Date(thread.created_at), {
                     addSuffix: true,

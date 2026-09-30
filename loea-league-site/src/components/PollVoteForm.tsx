@@ -65,33 +65,33 @@ export default function PollVoteForm({
             <button
               onClick={() => vote(opt.id)}
               disabled={isClosed || loading !== null}
-              className={`relative w-full overflow-hidden border-2 px-4 py-3 text-left transition disabled:cursor-default ${
-                isMine ? "border-amber-500" : "border-slate-700 hover:border-amber-500"
+              className={`relative w-full overflow-hidden border-4 px-4 py-3 text-left transition disabled:cursor-default ${
+                isMine ? "border-neo-ink" : "border-neo-ink hover:border-neo-ink"
               }`}
             >
               <div
-                className="absolute inset-y-0 left-0 bg-yellow-400/50"
+                className="absolute inset-y-0 left-0 bg-neo-violet"
                 style={{ width: `${pct}%` }}
               />
               <div className="relative flex items-center justify-between">
-                <span className="text-slate-100">
+                <span className="text-neo-ink">
                   {opt.option_text} {isMine && "✓"}
                 </span>
-                <span className="text-sm text-slate-400">
+                <span className="text-sm text-neo-ink">
                   {loading === opt.id ? "Voting..." : `${pct}% (${opt.votes})`}
                 </span>
               </div>
             </button>
             {opt.voters && opt.voters.length > 0 && (
-              <p className="pl-1 text-xs text-slate-500">
+              <p className="pl-1 text-xs text-neo-ink">
                 Voted by: {opt.voters.join(", ")}
               </p>
             )}
           </div>
         );
       })}
-      {error && <p className="text-sm text-red-400">{error}</p>}
-      <p className="text-xs text-slate-500">
+      {error && <p className="text-sm text-neo-error">{error}</p>}
+      <p className="text-xs text-neo-ink">
         {totalVotes} total vote(s){" "}
         {myVoteOptionId && !isClosed && "· tap another option to change your vote"}
         {isClosed && "· poll closed"}

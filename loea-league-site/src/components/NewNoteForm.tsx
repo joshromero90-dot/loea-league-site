@@ -45,7 +45,7 @@ export default function NewNoteForm() {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400"
+        className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow"
       >
         + Post a note
       </button>
@@ -55,14 +55,14 @@ export default function NewNoteForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 border-2 border-slate-800 bg-slate-900 p-5"
+      className="flex flex-col gap-3 border-4 border-neo-ink bg-white p-5"
     >
       <input
         required
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+        className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
       />
       <textarea
         required
@@ -70,9 +70,9 @@ export default function NewNoteForm() {
         value={body}
         onChange={(e) => setBody(e.target.value)}
         rows={4}
-        className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+        className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
       />
-      <label className="flex items-center gap-2 text-sm text-slate-300">
+      <label className="flex items-center gap-2 text-sm text-neo-ink">
         <input
           type="checkbox"
           checked={pinned}
@@ -80,19 +80,19 @@ export default function NewNoteForm() {
         />
         Pin to top
       </label>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-neo-error">{error}</p>}
       <div className="flex gap-2">
         <button
           type="submit"
           disabled={loading}
-          className="bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+          className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow disabled:opacity-50"
         >
           {loading ? "Posting..." : "Post"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="border-2 border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
+          className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-violet"
         >
           Cancel
         </button>

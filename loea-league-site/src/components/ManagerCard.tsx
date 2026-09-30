@@ -91,28 +91,28 @@ export default function ManagerCard({
     <Card>
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-semibold text-slate-100">
+          <p className="font-bold text-neo-ink">
             {manager.display_name}
           </p>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-neo-ink">
             {manager.team_name || "No team name set"}
           </p>
         </div>
         {manager.is_commissioner && (
-          <span className="shrink-0 border-2 border-slate-800 bg-yellow-400 px-2 py-0.5 text-xs font-bold uppercase text-slate-100">
+          <span className="shrink-0 border-4 border-neo-ink bg-neo-yellow px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
             Commissioner
           </span>
         )}
       </div>
 
       {espnConfigured && (
-        <div className="mt-4 border-t border-slate-800 pt-3">
+        <div className="mt-4 border-t border-neo-ink pt-3">
           {manager.espn_team_id ? (
             <>
               <button
                 type="button"
                 onClick={toggleLineup}
-                className="text-sm text-amber-400 hover:underline"
+                className="text-sm text-neo-ink hover:underline"
               >
                 {lineupOpen ? "Hide lineup" : "View lineup"}
               </button>
@@ -120,13 +120,13 @@ export default function ManagerCard({
               {lineupOpen && (
                 <div className="mt-3">
                   {rosterLoading && (
-                    <p className="text-xs text-slate-500">Loading...</p>
+                    <p className="text-xs text-neo-ink">Loading...</p>
                   )}
                   {rosterError && (
-                    <p className="text-xs text-red-400">{rosterError}</p>
+                    <p className="text-xs text-neo-error">{rosterError}</p>
                   )}
                   {!rosterLoading && !rosterError && roster?.length === 0 && (
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-neo-ink">
                       Rosters aren&apos;t set yet — check back after the
                       draft.
                     </p>
@@ -140,17 +140,17 @@ export default function ManagerCard({
                         >
                           <span
                             className={
-                              p.isStarter ? "text-slate-200" : "text-slate-500"
+                              p.isStarter ? "text-neo-ink" : "text-neo-ink"
                             }
                           >
                             {p.name}
                             {p.injuryStatus && (
-                              <span className="ml-1 text-red-400">
+                              <span className="ml-1 text-neo-error">
                                 {p.injuryStatus}
                               </span>
                             )}
                           </span>
-                          <span className="shrink-0 text-slate-500">
+                          <span className="shrink-0 text-neo-ink">
                             {p.slot}
                           </span>
                         </li>
@@ -162,14 +162,14 @@ export default function ManagerCard({
             </>
           ) : isOwnProfile ? (
             <div className="flex flex-col gap-2">
-              <label className="text-xs text-slate-400">
+              <label className="text-xs text-neo-ink">
                 Link your ESPN team to show your lineup here
               </label>
               <div className="flex gap-2">
                 <select
                   value={selectedTeamId}
                   onChange={(e) => setSelectedTeamId(e.target.value)}
-                  className="flex-1 border-2 border-slate-700 bg-slate-900 px-2 py-1.5 text-sm text-slate-100 outline-none focus:border-amber-500"
+                  className="flex-1 border-4 border-neo-ink bg-white px-2 py-1.5 text-sm text-neo-ink outline-none focus:border-neo-ink"
                 >
                   <option value="">Select your team...</option>
                   {espnTeams.map((t) => (
@@ -182,17 +182,17 @@ export default function ManagerCard({
                   type="button"
                   onClick={saveTeamLink}
                   disabled={!selectedTeamId || linking}
-                  className="bg-amber-500 px-3 py-1.5 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+                  className="bg-neo-red px-3 py-1.5 text-sm font-bold text-neo-ink hover:bg-neo-yellow disabled:opacity-50"
                 >
                   {linking ? "Saving..." : "Link"}
                 </button>
               </div>
               {linkError && (
-                <p className="text-xs text-red-400">{linkError}</p>
+                <p className="text-xs text-neo-error">{linkError}</p>
               )}
             </div>
           ) : (
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-neo-ink">
               Hasn&apos;t linked their ESPN team yet.
             </p>
           )}

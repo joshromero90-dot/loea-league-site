@@ -97,10 +97,10 @@ export default async function HistoryPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-neo-ink">
         🏅 Hall of Fame
       </h1>
-      <p className="mb-6 text-sm text-slate-500">
+      <p className="mb-6 text-sm text-neo-ink">
         Champions, punishments, and everything in between.
         {espnHistoryConfigured() && " Results marked ESPN sync automatically."}
       </p>
@@ -108,7 +108,7 @@ export default async function HistoryPage() {
       {profile?.is_commissioner && (
         <div className="mb-8">
           <NewHallOfFameEntryForm />
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-xs text-neo-ink">
             Use this to add the punishment, notes, or manager name for a
             season — if ESPN already has the result for that year, you only
             need to fill in the extra details; the season year is enough to
@@ -118,7 +118,7 @@ export default async function HistoryPage() {
       )}
 
       {seasons.length === 0 && (
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-neo-ink">
           No history yet — add the first season above, or connect ESPN
           history in Setup for it to fill in automatically.
         </p>
@@ -128,22 +128,22 @@ export default async function HistoryPage() {
         {seasons.map((entry) => (
           <Card key={entry.seasonYear}>
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-black uppercase tracking-tight text-amber-500">
+              <h2 className="text-lg font-black uppercase tracking-tight text-neo-ink">
                 {entry.seasonYear} Season
               </h2>
               {entry.fromEspn && (
-                <span className="border-2 border-slate-800 px-2 py-0.5 text-xs font-bold uppercase text-slate-400">
+                <span className="border-4 border-neo-ink px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
                   ESPN sync
                 </span>
               )}
             </div>
             <dl className="mt-2 grid grid-cols-1 gap-x-4 gap-y-1 text-sm sm:grid-cols-2">
               <div>
-                <dt className="text-slate-500">🏆 Champion</dt>
-                <dd className="text-slate-100">
+                <dt className="text-neo-ink">🏆 Champion</dt>
+                <dd className="text-neo-ink">
                   {entry.championTeam ?? "—"}
                   {entry.championManager && (
-                    <span className="block text-xs text-slate-500">
+                    <span className="block text-xs text-neo-ink">
                       {entry.championManager}
                     </span>
                   )}
@@ -151,11 +151,11 @@ export default async function HistoryPage() {
               </div>
               {entry.runnerUpTeam && (
                 <div>
-                  <dt className="text-slate-500">🥈 Runner-up</dt>
-                  <dd className="text-slate-100">
+                  <dt className="text-neo-ink">🥈 Runner-up</dt>
+                  <dd className="text-neo-ink">
                     {entry.runnerUpTeam}
                     {entry.runnerUpManager && (
-                      <span className="block text-xs text-slate-500">
+                      <span className="block text-xs text-neo-ink">
                         {entry.runnerUpManager}
                       </span>
                     )}
@@ -164,11 +164,11 @@ export default async function HistoryPage() {
               )}
               {entry.lastPlaceTeam && (
                 <div>
-                  <dt className="text-slate-500">💩 Last place</dt>
-                  <dd className="text-slate-100">
+                  <dt className="text-neo-ink">💩 Last place</dt>
+                  <dd className="text-neo-ink">
                     {entry.lastPlaceTeam}
                     {entry.lastPlaceManager && (
-                      <span className="block text-xs text-slate-500">
+                      <span className="block text-xs text-neo-ink">
                         {entry.lastPlaceManager}
                       </span>
                     )}
@@ -177,13 +177,13 @@ export default async function HistoryPage() {
               )}
               {entry.punishment && (
                 <div>
-                  <dt className="text-slate-500">Punishment</dt>
-                  <dd className="text-slate-100">{entry.punishment}</dd>
+                  <dt className="text-neo-ink">Punishment</dt>
+                  <dd className="text-neo-ink">{entry.punishment}</dd>
                 </div>
               )}
             </dl>
             {entry.notes && (
-              <p className="mt-3 text-sm text-slate-300">{entry.notes}</p>
+              <p className="mt-3 text-sm text-neo-ink">{entry.notes}</p>
             )}
           </Card>
         ))}

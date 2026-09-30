@@ -9,8 +9,8 @@ export default async function ProfilePage() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">👤 Your Profile</h1>
-      <p className="mb-6 text-sm text-slate-500">
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-neo-ink">👤 Your Profile</h1>
+      <p className="mb-6 text-sm text-neo-ink">
         Update how your name and team show up around the league.
       </p>
       <EditProfileForm profile={profile} />

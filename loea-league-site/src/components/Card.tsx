@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div
-      className={`border-2 border-slate-800 bg-slate-900 p-5 ${className}`}
+      className={`neo-card ${className}`}
     >
       {children}
     </div>
@@ -25,13 +25,13 @@ export function CardLink({
   return (
     <Link
       href={href}
-      className="group border-2 border-slate-800 bg-slate-900 p-5 transition hover:border-amber-500 hover:bg-amber-500/5"
+      className="group neo-card neo-card-link"
     >
       <div className="mb-2 text-2xl">{emoji}</div>
-      <h3 className="font-bold uppercase tracking-tight text-slate-100 group-hover:text-amber-500">
+      <h3 className="font-bold uppercase tracking-tight text-neo-ink group-hover:text-neo-ink">
         {title}
       </h3>
-      <p className="mt-1 text-sm text-slate-400">{description}</p>
+      <p className="mt-1 text-sm text-neo-ink">{description}</p>
     </Link>
   );
 }

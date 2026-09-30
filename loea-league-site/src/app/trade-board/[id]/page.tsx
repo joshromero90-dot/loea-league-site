@@ -36,8 +36,8 @@ export default async function ThreadPage({
   return (
     <div className="mx-auto max-w-2xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-black uppercase tracking-tight text-slate-100">{thread.title}</h1>
-        <p className="mt-1 text-xs text-slate-500">
+        <h1 className="text-2xl font-black uppercase tracking-tight text-neo-ink">{thread.title}</h1>
+        <p className="mt-1 text-xs text-neo-ink">
           Started by {starter?.display_name ?? "a manager"} ·{" "}
           {formatDistanceToNow(new Date(thread.created_at), { addSuffix: true })}
           {thread.is_closed && " · closed"}
@@ -46,17 +46,17 @@ export default async function ThreadPage({
 
       <div className="mb-6 flex flex-col gap-3">
         {(!messages || messages.length === 0) && (
-          <p className="text-sm text-slate-500">No replies yet.</p>
+          <p className="text-sm text-neo-ink">No replies yet.</p>
         )}
         {messages?.map((m) => {
           const author = Array.isArray(m.profiles) ? m.profiles[0] : m.profiles;
           return (
             <div
               key={m.id}
-              className="border-2 border-slate-800 bg-slate-900 p-4"
+              className="neo-card"
             >
-              <p className="text-sm text-slate-200">{m.body}</p>
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="text-sm text-neo-ink">{m.body}</p>
+              <p className="mt-2 text-xs text-neo-ink">
                 {author?.display_name ?? "Manager"} ·{" "}
                 {formatDistanceToNow(new Date(m.created_at), { addSuffix: true })}
               </p>
@@ -68,7 +68,7 @@ export default async function ThreadPage({
       {!thread.is_closed ? (
         <ReplyForm threadId={thread.id} />
       ) : (
-        <p className="text-sm text-slate-500">This thread is closed.</p>
+        <p className="text-sm text-neo-ink">This thread is closed.</p>
       )}
 
       {canClose && !thread.is_closed && (

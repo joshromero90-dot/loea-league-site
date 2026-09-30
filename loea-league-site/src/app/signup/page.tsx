@@ -45,12 +45,12 @@ export default function SignupPage() {
   if (done) {
     return (
       <div className="mx-auto flex min-h-[80vh] max-w-md flex-col justify-center px-4 text-center">
-        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-slate-100">Check your email</h1>
-        <p className="text-slate-400">
+        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-neo-ink">Check your email</h1>
+        <p className="text-neo-ink">
           We sent a confirmation link to <strong>{email}</strong>. Click it,
           then come back and log in.
         </p>
-        <Link href="/login" className="mt-6 text-amber-400 hover:underline">
+        <Link href="/login" className="mt-6 text-neo-ink hover:underline">
           Go to login
         </Link>
       </div>
@@ -59,61 +59,61 @@ export default function SignupPage() {
 
   return (
     <div className="mx-auto flex min-h-[80vh] max-w-md flex-col justify-center px-4">
-      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">Join the League</h1>
-      <p className="mb-6 text-sm text-slate-400">Create your manager account</p>
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-neo-ink">Join the League</h1>
+      <p className="mb-6 text-sm text-neo-ink">Create your manager account</p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
-          <label className="mb-1 block text-sm text-slate-300">Your name</label>
+          <label className="mb-1 block text-sm text-neo-ink">Your name</label>
           <input
             required
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
-            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm text-slate-300">
+          <label className="mb-1 block text-sm text-neo-ink">
             Team name (optional)
           </label>
           <input
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
-            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm text-slate-300">Email</label>
+          <label className="mb-1 block text-sm text-neo-ink">Email</label>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm text-slate-300">Password</label>
+          <label className="mb-1 block text-sm text-neo-ink">Password</label>
           <input
             type="password"
             required
             minLength={6}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border-2 border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-amber-500"
+            className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
           />
         </div>
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && <p className="text-sm text-neo-error">{error}</p>}
         <button
           type="submit"
           disabled={loading}
-          className="bg-amber-500 px-4 py-2 font-semibold text-slate-950 transition hover:bg-amber-400 disabled:opacity-50"
+          className="bg-neo-red px-4 py-2 font-bold text-neo-ink transition hover:bg-neo-yellow disabled:opacity-50"
         >
           {loading ? "Creating account..." : "Create account"}
         </button>
       </form>
-      <p className="mt-6 text-sm text-slate-400">
+      <p className="mt-6 text-sm text-neo-ink">
         Already have an account?{" "}
-        <Link href="/login" className="text-amber-400 hover:underline">
+        <Link href="/login" className="text-neo-ink hover:underline">
           Log in
         </Link>
       </p>

@@ -29,7 +29,7 @@ export default function TogglePinButton({
     <button
       onClick={toggle}
       disabled={loading}
-      className="text-xs font-bold uppercase text-amber-500 transition hover:underline disabled:opacity-50"
+      className="text-xs font-bold uppercase text-neo-ink transition hover:underline disabled:opacity-50"
     >
       {loading ? "..." : pinned ? "Unpin" : "Pin"}
     </button>

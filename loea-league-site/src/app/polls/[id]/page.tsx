@@ -59,10 +59,10 @@ export default async function PollPage({
 
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-neo-ink">
         {poll.question}
       </h1>
-      <p className="mb-6 text-xs text-slate-500">
+      <p className="mb-6 text-xs text-neo-ink">
         {poll.is_closed ? "Closed" : "Open"} ·{" "}
         {new Date(poll.created_at).toLocaleDateString()}
       </p>

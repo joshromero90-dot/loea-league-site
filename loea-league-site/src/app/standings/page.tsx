@@ -4,22 +4,22 @@ export default async function StandingsPage() {
   if (!espnConfigured()) {
     return (
       <div className="mx-auto max-w-xl text-center">
-        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-slate-100">
+        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-neo-ink">
           📊 Standings
         </h1>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-neo-ink">
           Live standings aren&apos;t connected yet. Add{" "}
-          <code className="rounded bg-slate-800 px-1.5 py-0.5">
+          <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">
             ESPN_LEAGUE_ID
           </code>{" "}
           and{" "}
-          <code className="rounded bg-slate-800 px-1.5 py-0.5">
+          <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">
             ESPN_SEASON_YEAR
           </code>{" "}
           (and, for private leagues,{" "}
-          <code className="rounded bg-slate-800 px-1.5 py-0.5">ESPN_SWID</code>
+          <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">ESPN_SWID</code>
           /
-          <code className="rounded bg-slate-800 px-1.5 py-0.5">ESPN_S2</code>)
+          <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">ESPN_S2</code>)
           to your environment variables. See the setup guide included with
           this project.
         </p>
@@ -38,10 +38,10 @@ export default async function StandingsPage() {
   if (errorMessage || !standings) {
     return (
       <div className="mx-auto max-w-xl text-center">
-        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-slate-100">
+        <h1 className="mb-2 text-2xl font-black uppercase tracking-tight text-neo-ink">
           📊 Standings
         </h1>
-        <p className="text-sm text-red-400">{errorMessage}</p>
+        <p className="text-sm text-neo-error">{errorMessage}</p>
       </div>
     );
   }
@@ -50,15 +50,15 @@ export default async function StandingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">📊 Standings</h1>
-      <p className="mb-6 text-sm text-slate-500">
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-neo-ink">📊 Standings</h1>
+      <p className="mb-6 text-sm text-neo-ink">
         {seasonYear} season{currentWeek ? ` · Week ${currentWeek}` : ""} ·
         synced from ESPN
       </p>
 
-      <div className="overflow-hidden border-2 border-slate-800">
+      <div className="league-table">
         <table className="w-full text-sm">
-          <thead className="bg-slate-800 text-left text-xs uppercase tracking-wide text-slate-950">
+          <thead className="bg-neo-yellow text-left text-xs uppercase tracking-wide text-neo-ink">
             <tr>
               <th className="px-4 py-3">#</th>
               <th className="px-4 py-3">Team</th>
@@ -73,14 +73,14 @@ export default async function StandingsPage() {
                 key={team.id}
                 className={
                   i === 0
-                    ? "border-t border-slate-800 bg-amber-500 text-slate-950"
-                    : "border-t border-slate-800 text-slate-200"
+                    ? "border-t border-neo-ink bg-neo-red text-neo-ink"
+                    : "border-t border-neo-ink text-neo-ink"
                 }
               >
-                <td className={i === 0 ? "px-4 py-3 font-black" : "px-4 py-3 text-slate-500"}>
+                <td className={i === 0 ? "px-4 py-3 font-black" : "px-4 py-3 text-neo-ink"}>
                   {i + 1}
                 </td>
-                <td className="px-4 py-3 font-medium">{team.name}</td>
+                <td className="px-4 py-3 font-bold">{team.name}</td>
                 <td className="px-4 py-3 text-right">
                   {team.wins}-{team.losses}
                   {team.ties ? `-${team.ties}` : ""}

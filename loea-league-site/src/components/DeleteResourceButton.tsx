@@ -24,7 +24,7 @@ export default function DeleteResourceButton({
     <button
       onClick={remove}
       disabled={loading}
-      className="text-xs text-slate-500 hover:text-red-400 disabled:opacity-50"
+      className="text-xs text-neo-ink hover:text-neo-error disabled:opacity-50"
     >
       {loading ? "..." : "Remove"}
     </button>

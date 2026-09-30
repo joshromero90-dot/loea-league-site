@@ -76,30 +76,30 @@ export default async function NewsPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-slate-100">
+      <h1 className="mb-1 text-2xl font-black uppercase tracking-tight text-neo-ink">
         📰 News
       </h1>
-      <p className="mb-8 text-sm text-slate-500">
+      <p className="mb-8 text-sm text-neo-ink">
         League moves straight from ESPN, plus the wider NFL wire.
       </p>
 
       <section className="mb-10">
-        <h2 className="mb-1 text-lg font-black uppercase tracking-tight text-slate-100">
+        <h2 className="mb-1 text-lg font-black uppercase tracking-tight text-neo-ink">
           😈 Asshole News
         </h2>
-        <p className="mb-4 text-sm text-slate-500">
+        <p className="mb-4 text-sm text-neo-ink">
           Trades, waiver claims, and pickups — auto-synced from ESPN&apos;s
           Recent Activity.
         </p>
 
         {!hasEspn && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-neo-ink">
             League activity isn&apos;t connected yet. Add{" "}
-            <code className="rounded bg-slate-800 px-1.5 py-0.5">
+            <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">
               ESPN_LEAGUE_ID
             </code>{" "}
             and{" "}
-            <code className="rounded bg-slate-800 px-1.5 py-0.5">
+            <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">
               ESPN_SEASON_YEAR
             </code>{" "}
             to your environment variables to see it here.
@@ -107,7 +107,7 @@ export default async function NewsPage() {
         )}
 
         {hasEspn && activity.length === 0 && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-neo-ink">
             No recent moves yet — check back after the next waiver run.
           </p>
         )}
@@ -116,13 +116,13 @@ export default async function NewsPage() {
           {activity.map((item) => (
             <div
               key={item.id}
-              className="border-2 border-slate-800 bg-slate-900 p-4"
+              className="neo-card"
             >
-              <p className="text-xs font-bold uppercase tracking-wide text-amber-500">
+              <p className="text-xs font-bold uppercase tracking-wide text-neo-ink">
                 {ACTIVITY_LABELS[item.kind]}
               </p>
-              <p className="mt-1 text-slate-100">{item.summary}</p>
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="mt-1 text-neo-ink">{item.summary}</p>
+              <p className="mt-1 text-xs text-neo-ink">
                 {formatDistanceToNow(new Date(item.date), {
                   addSuffix: true,
                 })}
@@ -133,21 +133,21 @@ export default async function NewsPage() {
       </section>
 
       <section>
-        <h2 className="mb-1 text-lg font-black uppercase tracking-tight text-slate-100">
+        <h2 className="mb-1 text-lg font-black uppercase tracking-tight text-neo-ink">
           🏈 NFL News
         </h2>
-        <p className="mb-4 text-sm text-slate-500">
+        <p className="mb-4 text-sm text-neo-ink">
           Auto-updated from ESPN and CBS Sports.
         </p>
 
         {newsFailed && (
-          <p className="text-sm text-red-400">
+          <p className="text-sm text-neo-error">
             Couldn&apos;t load news right now — try again shortly.
           </p>
         )}
 
         {!newsFailed && news.length === 0 && (
-          <p className="text-sm text-slate-500">No headlines available.</p>
+          <p className="text-sm text-neo-ink">No headlines available.</p>
         )}
 
         <div className="flex flex-col gap-3">
@@ -157,10 +157,10 @@ export default async function NewsPage() {
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block border-2 border-slate-800 bg-slate-900 p-4 transition hover:border-amber-500/60"
+              className="block neo-card transition hover:border-neo-ink"
             >
-              <p className="font-medium text-slate-100">{item.title}</p>
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="font-bold text-neo-ink">{item.title}</p>
+              <p className="mt-1 text-xs text-neo-ink">
                 {item.source}
                 {item.pubDate &&
                   ` · ${formatDistanceToNow(new Date(item.pubDate), {
