@@ -16,6 +16,7 @@ export type NavItem = NavLink | NavGroup;
 const LINKS: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/standings", label: "Standings" },
+  { href: "/trade-board", label: "Trade Board" },
   {
     label: "Updates",
     children: [
@@ -24,7 +25,6 @@ const LINKS: NavItem[] = [
       { href: "/news", label: "News" },
     ],
   },
-  { href: "/trade-board", label: "Trade Board" },
   {
     label: "League Info",
     children: [

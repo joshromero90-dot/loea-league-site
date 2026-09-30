@@ -48,7 +48,7 @@ export default async function Home() {
       </div>
 
       <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-[3fr_2fr]">
-        <Card className="bg-neo-highlight">
+        <Card className="bg-neo-accent">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-black uppercase tracking-tight text-neo-ink">📌 New Notes</h2>
             <Link
