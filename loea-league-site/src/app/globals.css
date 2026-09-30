@@ -1,63 +1,63 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neo-paper: #fffdf5;
-  --color-neo-ink: #000000;
-  --color-neo-red: #ff6b6b;
-  --color-neo-yellow: #ffd93d;
-  --color-neo-violet: #c4b5fd;
+  --color-neo-paper: #f2dcc2;
+  --color-neo-ink: #011526;
+  --color-neo-accent: #f2522e;
+  --color-neo-highlight: #f28b30;
+  --color-neo-muted: #bfae99;
   --color-neo-error: #a31717;
-  --shadow-neo-sm: 4px 4px 0 #000;
-  --shadow-neo: 8px 8px 0 #000;
-  --shadow-neo-lg: 12px 12px 0 #000;
+  --shadow-neo-sm: 4px 4px 0 var(--color-neo-ink);
+  --shadow-neo: 8px 8px 0 var(--color-neo-ink);
+  --shadow-neo-lg: 12px 12px 0 var(--color-neo-ink);
 }
 
 @layer base {
   body { color: var(--color-neo-ink); font-weight: 700; }
-  ::selection { background: var(--color-neo-violet); color: #000; }
+  ::selection { background: var(--color-neo-muted); color: var(--color-neo-ink); }
   h1, h2, h3 { font-weight: 900; text-wrap: balance; }
   main h1 { font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 1rem; overflow-wrap: anywhere; }
   p { line-height: 1.65; }
   button { cursor: pointer; }
   button:disabled { cursor: not-allowed; }
   button, input:not([type="checkbox"]):not([type="radio"]), textarea, select {
-    border: 4px solid #000; border-radius: 0;
+    border: 4px solid var(--color-neo-ink); border-radius: 0;
     font-weight: 700; min-height: 48px;
   }
-  button { background-color: var(--color-neo-yellow); box-shadow: var(--shadow-neo-sm); padding: .65rem 1rem; text-transform: uppercase; transition: transform 100ms linear, box-shadow 100ms linear, background-color 100ms linear; }
+  button { background-color: var(--color-neo-highlight); box-shadow: var(--shadow-neo-sm); padding: .65rem 1rem; text-transform: uppercase; transition: transform 100ms linear, box-shadow 100ms linear, background-color 100ms linear; }
   button:active:not(:disabled) { transform: translate(4px, 4px); box-shadow: none; }
   input, textarea, select { padding: .75rem; max-width: 100%; min-width: 0; }
-  input::placeholder, textarea::placeholder { color: #000; opacity: .6; }
-  input:focus-visible, textarea:focus-visible, select:focus-visible { background: var(--color-neo-yellow); box-shadow: var(--shadow-neo-sm); }
-  :focus-visible { outline: 3px solid #000; outline-offset: 4px; }
+  input::placeholder, textarea::placeholder { color: var(--color-neo-ink); opacity: .6; }
+  input:focus-visible, textarea:focus-visible, select:focus-visible { background: var(--color-neo-highlight); box-shadow: var(--shadow-neo-sm); }
+  :focus-visible { outline: 3px solid var(--color-neo-ink); outline-offset: 4px; }
   a { text-underline-offset: 4px; }
   main a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
-  table { background: #fff; }
+  table { background: var(--color-neo-paper); }
   th { white-space: nowrap; }
   td { vertical-align: top; }
   tbody tr:nth-child(even) { background: var(--color-neo-paper); }
-  main form { background: #fff; border: 4px solid #000; padding: clamp(1rem, 3vw, 2rem); box-shadow: var(--shadow-neo); }
+  main form { background: var(--color-neo-paper); border: 4px solid var(--color-neo-ink); padding: clamp(1rem, 3vw, 2rem); box-shadow: var(--shadow-neo); }
 }
 
 @layer components {
-  .league-canvas { background-image: radial-gradient(#000 1px, transparent 1px); background-size: 24px 24px; }
-  .league-main { background: var(--color-neo-paper); border-inline: 4px solid #000; padding: 2rem 1.25rem 3rem; }
-  .neo-card { border: 4px solid #000; background: #fff; padding: 1.5rem; box-shadow: var(--shadow-neo); }
+  .league-canvas { background-image: radial-gradient(var(--color-neo-ink) 1px, transparent 1px); background-size: 24px 24px; }
+  .league-main { background: var(--color-neo-paper); border-inline: 4px solid var(--color-neo-ink); padding: 2rem 1.25rem 3rem; }
+  .neo-card { border: 4px solid var(--color-neo-ink); background: var(--color-neo-paper); padding: 1.5rem; box-shadow: var(--shadow-neo); }
   .neo-card-link { transition: transform 150ms linear, box-shadow 150ms linear; }
   .neo-card-link:hover { transform: translateY(-4px); box-shadow: var(--shadow-neo-lg); }
-  .neo-sticker { display: inline-block; border: 4px solid #000; padding: .5rem .8rem; background: var(--color-neo-yellow); box-shadow: var(--shadow-neo-sm); transform: rotate(-2deg); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; }
-  .league-hero { border: 4px solid #000; background: var(--color-neo-violet); box-shadow: var(--shadow-neo-lg); padding: clamp(1.5rem, 4vw, 3rem); }
+  .neo-sticker { display: inline-block; border: 4px solid var(--color-neo-ink); padding: .5rem .8rem; background: var(--color-neo-highlight); box-shadow: var(--shadow-neo-sm); transform: rotate(-2deg); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; }
+  .league-hero { border: 4px solid var(--color-neo-ink); background: var(--color-neo-muted); box-shadow: var(--shadow-neo-lg); padding: clamp(1.5rem, 4vw, 3rem); }
   .league-hero h1 { max-width: 17ch; font-size: clamp(2.6rem, 6vw, 5.5rem); letter-spacing: -.065em; margin-top: 1.5rem; }
   .league-hero p { max-width: 44ch; font-size: 1.1rem; }
-  .league-nav a, .league-nav button { color: #000; }
+  .league-nav a, .league-nav button { color: var(--color-neo-ink); }
   .league-nav nav a { border: 2px solid transparent; min-height: 44px; display: inline-flex; align-items: center; }
-  .league-nav nav a:hover { border-color: #000; background: var(--color-neo-red); box-shadow: var(--shadow-neo-sm); }
-  .league-nav button:hover { background: var(--color-neo-red); }
-  .league-table { overflow-x: auto; border: 4px solid #000; box-shadow: var(--shadow-neo); }
+  .league-nav nav a:hover { border-color: var(--color-neo-ink); background: var(--color-neo-accent); box-shadow: var(--shadow-neo-sm); }
+  .league-nav button:hover { background: var(--color-neo-accent); }
+  .league-table { overflow-x: auto; border: 4px solid var(--color-neo-ink); box-shadow: var(--shadow-neo); }
   .league-table table { min-width: 480px; }
-  .prize-panel { border: 4px solid #000; box-shadow: var(--shadow-neo-lg); }
+  .prize-panel { border: 4px solid var(--color-neo-ink); box-shadow: var(--shadow-neo-lg); }
   .prose-league { white-space: pre-wrap; line-height: 1.7; overflow-wrap: anywhere; }
-  .skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; transform: translateY(-200%); background: var(--color-neo-yellow); border: 4px solid #000; padding: .75rem 1rem; }
+  .skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; transform: translateY(-200%); background: var(--color-neo-highlight); border: 4px solid var(--color-neo-ink); padding: .75rem 1rem; }
   .skip-link:focus { transform: none; }
 }
 

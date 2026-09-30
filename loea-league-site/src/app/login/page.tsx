@@ -45,7 +45,7 @@ export default function LoginPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
+            className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
           />
         </div>
         <div>
@@ -55,14 +55,14 @@ export default function LoginPage() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
+            className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
           />
         </div>
         {error && <p className="text-sm text-neo-error">{error}</p>}
         <button
           type="submit"
           disabled={loading}
-          className="bg-neo-red px-4 py-2 font-bold text-neo-ink transition hover:bg-neo-yellow disabled:opacity-50"
+          className="bg-neo-accent px-4 py-2 font-bold text-neo-ink transition hover:bg-neo-highlight disabled:opacity-50"
         >
           {loading ? "Signing in..." : "Sign in"}
         </button>

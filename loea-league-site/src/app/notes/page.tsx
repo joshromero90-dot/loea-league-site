@@ -50,7 +50,7 @@ export default async function NotesPage() {
           const titleRow = (
             <div className="mb-1 flex items-center gap-2">
               {note.pinned && (
-                <span className="border-4 border-neo-ink bg-neo-yellow px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
+                <span className="border-4 border-neo-ink bg-neo-highlight px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
                   Pinned
                 </span>
               )}

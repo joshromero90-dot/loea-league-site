@@ -35,7 +35,7 @@ export default function MobileNav({
           >
             {profile.display_name}
             {profile.is_commissioner && (
-              <span className="ml-2 border-4 border-neo-ink bg-neo-yellow px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
+              <span className="ml-2 border-4 border-neo-ink bg-neo-highlight px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
                 Commissioner
               </span>
             )}
@@ -52,7 +52,7 @@ export default function MobileNav({
                       key={child.href}
                       href={child.href}
                       onClick={() => setOpen(false)}
-                      className="px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow hover:text-neo-ink"
+                      className="px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-highlight hover:text-neo-ink"
                     >
                       {child.label}
                     </Link>
@@ -63,7 +63,7 @@ export default function MobileNav({
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="px-2 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow hover:text-neo-ink"
+                  className="px-2 py-2 text-sm font-bold text-neo-ink hover:bg-neo-highlight hover:text-neo-ink"
                 >
                   {link.label}
                 </Link>

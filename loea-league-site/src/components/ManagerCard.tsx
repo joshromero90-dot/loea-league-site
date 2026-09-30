@@ -99,7 +99,7 @@ export default function ManagerCard({
           </p>
         </div>
         {manager.is_commissioner && (
-          <span className="shrink-0 border-4 border-neo-ink bg-neo-yellow px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
+          <span className="shrink-0 border-4 border-neo-ink bg-neo-highlight px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
             Commissioner
           </span>
         )}
@@ -169,7 +169,7 @@ export default function ManagerCard({
                 <select
                   value={selectedTeamId}
                   onChange={(e) => setSelectedTeamId(e.target.value)}
-                  className="flex-1 border-4 border-neo-ink bg-white px-2 py-1.5 text-sm text-neo-ink outline-none focus:border-neo-ink"
+                  className="flex-1 border-4 border-neo-ink bg-neo-paper px-2 py-1.5 text-sm text-neo-ink outline-none focus:border-neo-ink"
                 >
                   <option value="">Select your team...</option>
                   {espnTeams.map((t) => (
@@ -182,7 +182,7 @@ export default function ManagerCard({
                   type="button"
                   onClick={saveTeamLink}
                   disabled={!selectedTeamId || linking}
-                  className="bg-neo-red px-3 py-1.5 text-sm font-bold text-neo-ink hover:bg-neo-yellow disabled:opacity-50"
+                  className="bg-neo-accent px-3 py-1.5 text-sm font-bold text-neo-ink hover:bg-neo-highlight disabled:opacity-50"
                 >
                   {linking ? "Saving..." : "Link"}
                 </button>

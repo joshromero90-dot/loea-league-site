@@ -65,7 +65,7 @@ export default function NewHallOfFameEntryForm() {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow"
+        className="bg-neo-accent px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-highlight"
       >
         + Add a season
       </button>
@@ -73,12 +73,12 @@ export default function NewHallOfFameEntryForm() {
   }
 
   const inputClass =
-    "w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink";
+    "w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink";
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 border-4 border-neo-ink bg-white p-5"
+      className="flex flex-col gap-3 border-4 border-neo-ink bg-neo-paper p-5"
     >
       <div>
         <label className="mb-1 block text-sm text-neo-ink">Season year</label>
@@ -176,14 +176,14 @@ export default function NewHallOfFameEntryForm() {
         <button
           type="submit"
           disabled={loading}
-          className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow disabled:opacity-50"
+          className="bg-neo-accent px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-highlight disabled:opacity-50"
         >
           {loading ? "Saving..." : "Save season"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-violet"
+          className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-muted"
         >
           Cancel
         </button>

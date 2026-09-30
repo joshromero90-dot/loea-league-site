@@ -73,7 +73,7 @@ export default function NewPollPage() {
             required
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
+            className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
             placeholder="Should we switch to PPR next season?"
           />
         </div>
@@ -88,7 +88,7 @@ export default function NewPollPage() {
                 value={opt}
                 onChange={(e) => updateOption(i, e.target.value)}
                 placeholder={`Option ${i + 1}`}
-                className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
+                className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
               />
             ))}
           </div>
@@ -106,7 +106,7 @@ export default function NewPollPage() {
         <button
           type="submit"
           disabled={loading}
-          className="bg-neo-red px-4 py-2 font-bold text-neo-ink transition hover:bg-neo-yellow disabled:opacity-50"
+          className="bg-neo-accent px-4 py-2 font-bold text-neo-ink transition hover:bg-neo-highlight disabled:opacity-50"
         >
           {loading ? "Creating..." : "Create Poll"}
         </button>

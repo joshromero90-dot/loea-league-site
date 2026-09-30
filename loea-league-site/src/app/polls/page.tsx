@@ -49,7 +49,7 @@ export default async function PollsPage() {
         {profile?.is_commissioner && (
           <Link
             href="/polls/new"
-            className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow"
+            className="bg-neo-accent px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-highlight"
           >
             + New Poll
           </Link>

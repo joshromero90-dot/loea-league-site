@@ -53,7 +53,7 @@ export default function EditProfileForm({ profile }: { profile: Profile }) {
           required
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
-          className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
+          className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
         />
       </div>
 
@@ -65,7 +65,7 @@ export default function EditProfileForm({ profile }: { profile: Profile }) {
           value={teamName}
           onChange={(e) => setTeamName(e.target.value)}
           placeholder="e.g. The Gridiron Gremlins"
-          className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
+          className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
         />
       </div>
 
@@ -77,7 +77,7 @@ export default function EditProfileForm({ profile }: { profile: Profile }) {
       <button
         type="submit"
         disabled={saving}
-        className="bg-neo-red px-4 py-2 font-bold text-neo-ink transition hover:bg-neo-yellow disabled:opacity-50"
+        className="bg-neo-accent px-4 py-2 font-bold text-neo-ink transition hover:bg-neo-highlight disabled:opacity-50"
       >
         {saving ? "Saving..." : "Save Changes"}
       </button>

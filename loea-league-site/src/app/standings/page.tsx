@@ -9,17 +9,17 @@ export default async function StandingsPage() {
         </h1>
         <p className="text-sm text-neo-ink">
           Live standings aren&apos;t connected yet. Add{" "}
-          <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">
+          <code className="border-2 border-neo-ink bg-neo-highlight px-1.5 py-0.5">
             ESPN_LEAGUE_ID
           </code>{" "}
           and{" "}
-          <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">
+          <code className="border-2 border-neo-ink bg-neo-highlight px-1.5 py-0.5">
             ESPN_SEASON_YEAR
           </code>{" "}
           (and, for private leagues,{" "}
-          <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">ESPN_SWID</code>
+          <code className="border-2 border-neo-ink bg-neo-highlight px-1.5 py-0.5">ESPN_SWID</code>
           /
-          <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">ESPN_S2</code>)
+          <code className="border-2 border-neo-ink bg-neo-highlight px-1.5 py-0.5">ESPN_S2</code>)
           to your environment variables. See the setup guide included with
           this project.
         </p>
@@ -58,7 +58,7 @@ export default async function StandingsPage() {
 
       <div className="league-table">
         <table className="w-full text-sm">
-          <thead className="bg-neo-yellow text-left text-xs uppercase tracking-wide text-neo-ink">
+          <thead className="bg-neo-highlight text-left text-xs uppercase tracking-wide text-neo-ink">
             <tr>
               <th className="px-4 py-3">#</th>
               <th className="px-4 py-3">Team</th>
@@ -73,7 +73,7 @@ export default async function StandingsPage() {
                 key={team.id}
                 className={
                   i === 0
-                    ? "border-t border-neo-ink bg-neo-red text-neo-ink"
+                    ? "border-t border-neo-ink bg-neo-accent text-neo-ink"
                     : "border-t border-neo-ink text-neo-ink"
                 }
               >

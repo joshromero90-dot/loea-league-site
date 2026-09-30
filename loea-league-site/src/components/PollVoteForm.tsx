@@ -70,7 +70,7 @@ export default function PollVoteForm({
               }`}
             >
               <div
-                className="absolute inset-y-0 left-0 bg-neo-violet"
+                className="absolute inset-y-0 left-0 bg-neo-muted"
                 style={{ width: `${pct}%` }}
               />
               <div className="relative flex items-center justify-between">

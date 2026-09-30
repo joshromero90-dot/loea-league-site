@@ -48,7 +48,7 @@ export default async function Home() {
       </div>
 
       <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-[3fr_2fr]">
-        <Card className="bg-neo-yellow">
+        <Card className="bg-neo-highlight">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-black uppercase tracking-tight text-neo-ink">📌 New Notes</h2>
             <Link
@@ -76,7 +76,7 @@ export default async function Home() {
           )}
         </Card>
 
-        <Card className="bg-neo-red">
+        <Card className="bg-neo-accent">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-black uppercase tracking-tight text-neo-ink">🗳️ Open Polls</h2>
             <Link
@@ -127,7 +127,7 @@ export default async function Home() {
         {standings && standings.teams.length > 0 && (
           <div className="league-table">
             <table className="w-full text-sm">
-              <thead className="bg-neo-yellow text-left text-xs uppercase tracking-wide text-neo-ink">
+              <thead className="bg-neo-highlight text-left text-xs uppercase tracking-wide text-neo-ink">
                 <tr>
                   <th className="px-3 py-2">#</th>
                   <th className="px-3 py-2">Team</th>
@@ -141,7 +141,7 @@ export default async function Home() {
                     key={team.id}
                     className={
                       i === 0
-                        ? "border-t border-neo-ink bg-neo-red text-neo-ink"
+                        ? "border-t border-neo-ink bg-neo-accent text-neo-ink"
                         : "border-t border-neo-ink text-neo-ink"
                     }
                   >
@@ -165,7 +165,7 @@ export default async function Home() {
       </Card>
 
       <div className="prize-panel mt-10 grid grid-cols-1 sm:grid-cols-[3fr_2fr]">
-        <div className="bg-white p-2">
+        <div className="bg-neo-paper p-2">
           <Image
             src="/trophy.jpg"
             alt="The league championship trophy: a guy in a recliner wearing a football helmet, working a laptop"
@@ -175,7 +175,7 @@ export default async function Home() {
             className="h-full w-full object-cover"
           />
         </div>
-        <div className="flex flex-col justify-center bg-neo-red p-6 sm:p-8">
+        <div className="flex flex-col justify-center bg-neo-accent p-6 sm:p-8">
           <span className="text-xs font-bold uppercase tracking-wide text-neo-ink">
             The Prize
           </span>

@@ -45,7 +45,7 @@ export default function NewNoteForm() {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow"
+        className="bg-neo-accent px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-highlight"
       >
         + Post a note
       </button>
@@ -55,14 +55,14 @@ export default function NewNoteForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 border-4 border-neo-ink bg-white p-5"
+      className="flex flex-col gap-3 border-4 border-neo-ink bg-neo-paper p-5"
     >
       <input
         required
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
+        className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
       />
       <textarea
         required
@@ -70,7 +70,7 @@ export default function NewNoteForm() {
         value={body}
         onChange={(e) => setBody(e.target.value)}
         rows={4}
-        className="w-full border-4 border-neo-ink bg-white px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
+        className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 text-neo-ink outline-none focus:border-neo-ink"
       />
       <label className="flex items-center gap-2 text-sm text-neo-ink">
         <input
@@ -85,14 +85,14 @@ export default function NewNoteForm() {
         <button
           type="submit"
           disabled={loading}
-          className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow disabled:opacity-50"
+          className="bg-neo-accent px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-highlight disabled:opacity-50"
         >
           {loading ? "Posting..." : "Post"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-violet"
+          className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-muted"
         >
           Cancel
         </button>

@@ -95,11 +95,11 @@ export default async function NewsPage() {
         {!hasEspn && (
           <p className="text-sm text-neo-ink">
             League activity isn&apos;t connected yet. Add{" "}
-            <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">
+            <code className="border-2 border-neo-ink bg-neo-highlight px-1.5 py-0.5">
               ESPN_LEAGUE_ID
             </code>{" "}
             and{" "}
-            <code className="border-2 border-neo-ink bg-neo-yellow px-1.5 py-0.5">
+            <code className="border-2 border-neo-ink bg-neo-highlight px-1.5 py-0.5">
               ESPN_SEASON_YEAR
             </code>{" "}
             to your environment variables to see it here.

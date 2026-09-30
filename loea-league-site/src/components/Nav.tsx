@@ -43,7 +43,7 @@ export default async function Nav() {
     <header className="league-nav border-b-4 border-neo-ink bg-neo-paper sticky top-0 z-20">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <div className="flex min-w-0 items-center gap-4">
-          <Link href="/" className="flex shrink-0 items-center border-4 border-neo-ink bg-neo-yellow p-2 shadow-neo-sm">
+          <Link href="/" className="flex shrink-0 items-center border-4 border-neo-ink bg-neo-highlight p-2 shadow-neo-sm">
             <Image
               src="/LoEA6@4x.png"
               alt="The League of Extraordinary Assholes"
@@ -68,7 +68,7 @@ export default async function Nav() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="whitespace-nowrap px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-neo-ink transition hover:bg-neo-yellow hover:text-neo-ink"
+                    className="whitespace-nowrap px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-neo-ink transition hover:bg-neo-highlight hover:text-neo-ink"
                   >
                     {link.label}
                   </Link>
@@ -86,7 +86,7 @@ export default async function Nav() {
             >
               {profile.display_name}
               {profile.is_commissioner && (
-                <span className="ml-2 border-4 border-neo-ink bg-neo-yellow px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
+                <span className="ml-2 border-4 border-neo-ink bg-neo-highlight px-2 py-0.5 text-xs font-bold uppercase text-neo-ink">
                   Commissioner
                 </span>
               )}

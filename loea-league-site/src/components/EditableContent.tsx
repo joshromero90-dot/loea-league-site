@@ -46,14 +46,14 @@ export default function EditableContent({
           value={body}
           onChange={(e) => setBody(e.target.value)}
           rows={16}
-          className="w-full border-4 border-neo-ink bg-white px-3 py-2 font-mono text-sm text-neo-ink outline-none focus:border-neo-ink"
+          className="w-full border-4 border-neo-ink bg-neo-paper px-3 py-2 font-mono text-sm text-neo-ink outline-none focus:border-neo-ink"
         />
         {error && <p className="text-sm text-neo-error">{error}</p>}
         <div className="flex gap-2">
           <button
             onClick={save}
             disabled={loading}
-            className="bg-neo-red px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-yellow disabled:opacity-50"
+            className="bg-neo-accent px-4 py-2 text-sm font-bold text-neo-ink hover:bg-neo-highlight disabled:opacity-50"
           >
             {loading ? "Saving..." : "Save"}
           </button>
@@ -62,7 +62,7 @@ export default function EditableContent({
               setBody(initialBody);
               setEditing(false);
             }}
-            className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-violet"
+            className="border-4 border-neo-ink px-4 py-2 text-sm text-neo-ink hover:bg-neo-muted"
           >
             Cancel
           </button>
@@ -73,7 +73,7 @@ export default function EditableContent({
 
   return (
     <div>
-      <div className="prose-league border-4 border-neo-ink bg-white p-5 text-sm text-neo-ink">
+      <div className="prose-league border-4 border-neo-ink bg-neo-paper p-5 text-sm text-neo-ink">
         {body || "Nothing here yet."}
       </div>
       {canEdit && (
