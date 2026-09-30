@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neo-paper: #f2dcc2;
-  --color-neo-ink: #011526;
-  --color-neo-accent: #f2522e;
-  --color-neo-highlight: #f28b30;
-  --color-neo-muted: #bfae99;
-  --color-neo-error: #a31717;
+  --color-neo-paper: #9b9787;
+  --color-neo-ink: #2c2218;
+  --color-neo-accent: #cb310a;
+  --color-neo-highlight: #aa7455;
+  --color-neo-muted: #605444;
+  --color-neo-error: #681300;
+  --color-neo-light: #fffdf5;
+  --color-neo-deep: #100c08;
   --shadow-neo-sm: 4px 4px 0 var(--color-neo-ink);
   --shadow-neo: 8px 8px 0 var(--color-neo-ink);
   --shadow-neo-lg: 12px 12px 0 var(--color-neo-ink);
@@ -14,7 +16,7 @@
 
 @layer base {
   body { color: var(--color-neo-ink); font-weight: 700; }
-  ::selection { background: var(--color-neo-muted); color: var(--color-neo-ink); }
+  ::selection { background: var(--color-neo-muted); color: var(--color-neo-light); }
   h1, h2, h3 { font-weight: 900; text-wrap: balance; }
   main h1 { font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 1rem; overflow-wrap: anywhere; }
   p { line-height: 1.65; }
@@ -69,4 +71,26 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .neo-card-link:hover, button:active:not(:disabled) { transform: none; }
+}
+
+/* Contrast pairs for the soapstone and roast palette. Keep these after the
+   utility layer so existing ink classes remain readable on colored panels. */
+.league-hero, .league-hero .text-neo-ink,
+.bg-neo-accent, .bg-neo-accent .text-neo-ink,
+[class~="hover:bg-neo-accent"]:hover,
+[class~="hover:bg-neo-muted"]:hover {
+  color: var(--color-neo-light);
+}
+.bg-neo-highlight, .bg-neo-highlight .text-neo-ink,
+.neo-sticker, .league-hero .neo-sticker {
+  color: var(--color-neo-deep);
+}
+.league-nav nav a:hover, .league-nav button:hover {
+  color: var(--color-neo-light);
+}
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  color: var(--color-neo-deep);
+}
+input:focus-visible::placeholder, textarea:focus-visible::placeholder {
+  color: var(--color-neo-deep);
 }
